@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  name: argocd
+spec:
+  tls:
+    - hosts:
+        - deploy.osinfra.cn
+      secretName: argo-cd-tls
+  rules:
+    - host: deploy.osinfra.cn
+      http:
+        paths:
+          - backend:
+              serviceName: argocd-server
+              servicePort: 80
+            path: /

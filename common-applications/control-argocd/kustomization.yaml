@@ -1,0 +1,9 @@
+resources:
+  - ../../common-services/argocd
+  - ingress.yaml
+commonLabels:
+  app: control-argocd
+patchesStrategicMerge:
+  - deployment.yaml
+namespace: argocd
+

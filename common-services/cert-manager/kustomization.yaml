@@ -1,0 +1,4 @@
+resources:
+- cert-manager.yaml
+commonLabels:
+  common-app: cert-manager

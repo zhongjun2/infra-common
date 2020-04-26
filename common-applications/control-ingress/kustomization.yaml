@@ -1,0 +1,9 @@
+resources:
+  - ../../common-services/nginx-ingress
+commonLabels:
+  app: control-ingress
+patchesStrategicMerge:
+  - service.yaml
+  - configmap.yaml
+  - deployment.yaml
+

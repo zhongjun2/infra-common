@@ -1,0 +1,4 @@
+resources:
+- install-0.4.0.yaml
+commonLabels:
+  common-app: vault-standalone

@@ -1,0 +1,11 @@
+resources:
+  - ../../common-services/vault
+  - namespace.yaml
+  - pvc.yaml
+  - ingress.yaml
+commonLabels:
+  app: control-vault
+namespace: vault
+patchesStrategicMerge:
+  - statefulset.yaml
+

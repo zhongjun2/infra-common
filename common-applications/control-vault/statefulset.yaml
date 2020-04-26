@@ -1,0 +1,17 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: standalone-vault
+  namespace: default
+spec:
+  template:
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: standalone-vault-config
+        - persistentVolumeClaim:
+            claimName: vault-file-backend
+          name: data
+  volumeClaimTemplates: []

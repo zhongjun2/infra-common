@@ -1,0 +1,7 @@
+resources:
+  - ../../common-services/secret-manager
+commonLabels:
+  app: control-secret-manager
+patchesStrategicMerge:
+  - deployment.yaml
+
