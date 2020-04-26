@@ -1,0 +1,14 @@
+resources:
+  - ../../common-services/fluentd
+  - secrets.yaml
+commonLabels:
+  app: control-fluentd
+configMapGenerator:
+  - name: fluentd-config
+    files:
+      - kubernetes.conf
+patchesStrategicMerge:
+  - daemonset.yaml
+namespace: kube-system
+
+

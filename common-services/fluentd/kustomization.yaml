@@ -1,0 +1,4 @@
+resources:
+- fluentd-es-rbac.yaml
+commonLabels:
+  common-app: fluentd
