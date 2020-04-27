@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - deploy.osinfra.cn
+        - build.osinfra.cn
       secretName: argo-cd-tls
   rules:
-    - host: deploy.osinfra.cn
+    - host: build.osinfra.cn
       http:
         paths:
           - backend:
