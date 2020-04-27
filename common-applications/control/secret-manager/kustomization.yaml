@@ -1,5 +1,5 @@
 resources:
-  - ../../common-services/secret-manager
+  - ../../../common-services/secret-manager
 commonLabels:
   app: control-secret-manager
 patchesStrategicMerge:

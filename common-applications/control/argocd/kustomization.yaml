@@ -1,5 +1,5 @@
 resources:
-  - ../../common-services/argocd
+  - ../../../common-services/argocd
   - ingress.yaml
 commonLabels:
   app: control-argocd

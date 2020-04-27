@@ -8,7 +8,6 @@ spec:
     spec:
       containers:
         - name: secrets-manager
-          image: swr.cn-north-1.myhuaweicloud.com/mindspore/secrets-manager:v1.0.2
           args:
             - -vault.url=https://secret.osinfra.cn
             - -enable-debug-log

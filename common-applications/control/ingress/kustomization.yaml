@@ -1,5 +1,5 @@
 resources:
-  - ../../common-services/nginx-ingress
+  - ../../../common-services/nginx-ingress
 commonLabels:
   app: control-ingress
 patchesStrategicMerge:

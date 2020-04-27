@@ -1,5 +1,5 @@
 resources:
-  - ../../common-services/fluentd
+  - ../../../common-services/fluentd
   - secrets.yaml
 commonLabels:
   app: control-fluentd
