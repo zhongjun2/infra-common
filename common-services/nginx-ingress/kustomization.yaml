@@ -1,5 +1,6 @@
 resources:
 - install-nginx.yaml
+- configmap.yaml
 commonLabels:
   common-app: nginx-ingress
 
