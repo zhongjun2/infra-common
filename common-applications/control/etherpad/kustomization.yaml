@@ -1,0 +1,13 @@
+resources:
+  - ../../../common-services/etherpad
+  - ingress.yaml
+  - secrets.yaml
+  - namespace.yaml
+commonLabels:
+  app: control-etherpad
+patchesStrategicMerge:
+  - configmap.yaml
+  - pvc.yaml
+namespace: etherpad
+
+
