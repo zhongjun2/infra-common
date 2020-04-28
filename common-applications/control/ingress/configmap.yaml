@@ -10,4 +10,6 @@ data:
     "http_user_agent": "$http_user_agent", "geoip2_city_country_name": "$geoip2_city_country_name", "geoip2_city": "$geoip2_city",
      "geoip2_latitude": "$geoip2_latitude", "geoip2_longitude": "$geoip2_longitude"}'
   use-geoip2: "true"
+  server-tokens: "false"
+
 
