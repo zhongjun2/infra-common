@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: secret-sync-manager
+  namespace: secrets-manager
+spec:
+  template:
+    spec:
+      containers:
+        - name: secrets-manager
+          args:
+            - -vault.url=https://secret.osinfra.cn
+            - -enable-debug-log

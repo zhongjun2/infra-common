@@ -8,6 +8,5 @@ commonLabels:
 patchesStrategicMerge:
   - configmap.yaml
   - pvc.yaml
+  - service.yaml
 namespace: etherpad
-
-
