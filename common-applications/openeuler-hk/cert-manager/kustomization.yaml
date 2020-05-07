@@ -2,5 +2,5 @@ resources:
   - ../../../common-services/cert-manager-legacy
   - cluster-issuer.yaml
 commonLabels:
-  app: control-cert-manager
+  app: openeuler-hk-cert-manager
 

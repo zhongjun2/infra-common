@@ -1,8 +1,7 @@
 resources:
   - ../../../common-services/nginx-ingress
 commonLabels:
-  app: control-ingress
+  app: openeuler-hk-ingress
 patchesStrategicMerge:
   - service.yaml
   - deployment.yaml
-
