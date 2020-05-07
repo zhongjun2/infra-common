@@ -3,10 +3,6 @@ resources:
   - secrets.yaml
 commonLabels:
   app: openeuler-cn-north4-fluentd
-configMapGenerator:
-  - name: fluentd-config
-    files:
-      - kubernetes.conf
 patchesStrategicMerge:
   - daemonset.yaml
 namespace: kube-system

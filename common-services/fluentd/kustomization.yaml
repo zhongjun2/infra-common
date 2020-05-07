@@ -1,4 +1,8 @@
 resources:
 - fluentd-es-rbac.yaml
+configMapGenerator:
+  - name: fluentd-config
+    files:
+      - kubernetes.conf
 commonLabels:
   common-app: fluentd

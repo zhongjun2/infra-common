@@ -19,7 +19,7 @@ spec:
               subPath: kubernetes.conf
           env:
             - name:  FLUENT_ELASTICSEARCH_HOST
-              value: 119.8.111.61
+              value: log.osinfra.cn
             - name:  FLUENT_ELASTICSEARCH_PORT
               value: "9200"
             - name: FLUENT_ELASTICSEARCH_SCHEME

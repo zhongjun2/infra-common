@@ -2,7 +2,9 @@ resources:
   - ../../../common-services/fluentd
   - secrets.yaml
 commonLabels:
-  app: control-fluentd
+  app: openeuler-hk-fluentd
 patchesStrategicMerge:
   - daemonset.yaml
 namespace: kube-system
+
+
