@@ -1,7 +1,0 @@
-resources:
-  - ../../../common-services/secret-manager
-commonLabels:
-  app: openeuler-hk-secret-manager
-patchesStrategicMerge:
-  - deployment.yaml
-
