@@ -11,4 +11,3 @@ data:
      "geoip2_latitude": "$geoip2_latitude", "geoip2_longitude": "$geoip2_longitude"}'
   use-geoip2: "true"
   server-tokens: "false"
-  proxy-real-ip-cidr: "100.125.0.0/16"
