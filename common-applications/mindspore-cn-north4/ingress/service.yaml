@@ -11,3 +11,16 @@ spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
   loadBalancerIP: 49.4.7.167
+  ports:
+    - port: 443
+      name: https
+      targetPort: 443
+    - port: 80
+      name: http
+      targetPort: 80
+    - port: 30873
+      name: download-repo-server
+      targetPort: 30873
+    - port: 30873
+      name: download-repo-ssh
+      targetPort: 30022
