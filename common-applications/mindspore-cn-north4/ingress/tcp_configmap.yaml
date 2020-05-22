@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+# those ports will be exposed via ingress service
+# 30873  download.mindspore.cn's repo server port
+# 30022  download.mindspore.cn's ssh port
+data:
+  30873: "download/repo-service:873"
+  30022: "download/repo-service:22"
