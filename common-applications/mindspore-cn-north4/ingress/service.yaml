@@ -21,6 +21,6 @@ spec:
     - port: 30873
       name: download-repo-server
       targetPort: 30873
-    - port: 30873
+    - port: 30022
       name: download-repo-ssh
       targetPort: 30022
