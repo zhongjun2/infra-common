@@ -5,12 +5,12 @@ metadata:
   namespace: ingress-nginx
   annotations:
     kubernetes.io/elb.class: union
-    kubernetes.io/elb.id: cdf8c597-1508-4349-bc50-a7dbcf5f584e
+    kubernetes.io/elb.id: db277203-6d89-47fd-91bd-69b29f9f0b65
     kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
 spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
-  loadBalancerIP: 121.36.60.253
+  loadBalancerIP: 49.4.7.167
   ports:
     - port: 443
       name: https
@@ -18,4 +18,9 @@ spec:
     - port: 80
       name: http
       targetPort: 80
-
+    - port: 30873
+      name: download-repo-server
+      targetPort: 30873
+    - port: 30022
+      name: download-repo-ssh
+      targetPort: 30022

@@ -10,4 +10,5 @@ metadata:
 spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
-  loadBalancerIP: 159.138.11.195
+  
+  
