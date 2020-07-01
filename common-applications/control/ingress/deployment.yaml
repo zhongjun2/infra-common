@@ -16,4 +16,3 @@ spec:
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --maxmind-license-key=TtutIbyHcPwZNxNX
-            - --enable-ssl-passthrough=true
