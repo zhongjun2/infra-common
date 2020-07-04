@@ -12,5 +12,5 @@ data:
   use-geoip2: "true"
   server-tokens: "false"
   proxy-connect-timeout: "70"
-  keep-alive: "30"
+  keep-alive: "20"
 
