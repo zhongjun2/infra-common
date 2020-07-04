@@ -11,4 +11,6 @@ data:
      "geoip2_latitude": "$geoip2_latitude", "geoip2_longitude": "$geoip2_longitude"}'
   use-geoip2: "true"
   server-tokens: "false"
-  proxy-connect-timeout: "60"
+  proxy-connect-timeout: "70"
+  keep-alive: "30"
+
