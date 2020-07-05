@@ -13,4 +13,5 @@ data:
   server-tokens: "false"
   proxy-connect-timeout: "70"
   keep-alive: "10"
+  client-body-buffer-size: "64k"
 
