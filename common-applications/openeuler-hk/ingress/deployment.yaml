@@ -16,3 +16,4 @@ spec:
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --maxmind-license-key=TtutIbyHcPwZNxNX
+            - --default-backend-service=ingress-nginx/ingress-default-backend
