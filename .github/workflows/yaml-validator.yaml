@@ -16,7 +16,7 @@ jobs:
           # helm: 2.14.3
           command: |
             #!/bin/bash
-            for file in `ls ./applications`
+            for file in `ls ./common-applications`
             do
                 echo "Validating applications in control"
                 if [ -d "./common-applications/control/"$file ]; then
