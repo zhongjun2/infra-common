@@ -1,0 +1,59 @@
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate kustomization
+        uses: stefanprodan/kube-tools@master
+        with:
+          # https://github.com/fluxcd/flux/blob/master/docker/kubectl.version
+          kubectl: 1.14.7
+          # https://github.com/fluxcd/flux/blob/master/docker/kustomize.version
+          kustomize: 3.2.3
+          # https://github.com/fluxcd/helm-operator/blob/master/docker/helm.version
+          # helm: 2.14.3
+          command: |
+            #!/bin/bash
+            for file in `ls ./applications`
+            do
+                echo "Validating applications in control"
+                if [ -d "./common-applications/control/"$file ]; then
+                    echo "Validating applications of $file"
+                    if [ -f "./common-applications/control/"$file/"kustomization.yaml" ]; then
+                        kustomize build  "./common-applications/control/$file" | kubeval --strict --ignore-missing-schemas
+                    else
+                        kubeval --strict --ignore-missing-schemas -d "./common-applications/control/$file"
+                    fi
+                fi
+                echo "Validating applications in mindspore-cn-north1"
+                if [ -d "./common-applications/mindspore-cn-north1/"$file ]; then
+                    echo "Validating applications of $file"
+                    if [ -f "./common-applications/mindspore-cn-north1/"$file/"kustomization.yaml" ]; then
+                        kustomize build  "./common-applications/mindspore-cn-north1/$file" | kubeval --strict --ignore-missing-schemas
+                    else
+                        kubeval --strict --ignore-missing-schemas -d "./common-applications/mindspore-cn-north1/$file"
+                    fi
+                fi
+
+                echo "Validating applications in mindspore-cn-north4"
+                if [ -d "./common-applications/mindspore-cn-north4/"$file ]; then
+                    echo "Validating applications of $file"
+                    if [ -f "./common-applications/mindspore-cn-north4/"$file/"kustomization.yaml" ]; then
+                        kustomize build  "./common-applications/mindspore-cn-north4/$file" | kubeval --strict --ignore-missing-schemas
+                    else
+                        kubeval --strict --ignore-missing-schemas -d "./common-applications/mindspore-cn-north4/$file"
+                    fi
+                fi
+
+                echo "Validating applications in openeuler-hk"
+                if [ -d "./common-applications/openeuler-hk/"$file ]; then
+                    echo "Validating applications of $file"
+                    if [ -f "./common-applications/openeuler-hk/"$file/"kustomization.yaml" ]; then
+                        kustomize build  "./common-applications/openeuler-hk/$file" | kubeval --strict --ignore-missing-schemas
+                    else
+                        kubeval --strict --ignore-missing-schemas -d "./common-applications/openeuler-hk/$file"
+                    fi
+                fi
+            done
