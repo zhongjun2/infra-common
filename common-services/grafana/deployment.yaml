@@ -3,7 +3,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: grafana
-  namespace: monitoring
   labels:
     app: grafana
 spec:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana:6.5.1
+        image: grafana/grafana:7.1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
@@ -58,8 +57,8 @@ spec:
         - mountPath: /var/lib/grafana
           subPath: grafana
           name: storage
-        - mountPath: /etc/grafana
-          subPath: grafana.ini
+        - mountPath: /etc/grafana/grafana.ini
+          subPath: grafana_ini
           name: grafana-secrets-volume
       securityContext:
         fsGroup: 472

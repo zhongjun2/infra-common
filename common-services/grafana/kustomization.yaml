@@ -1,8 +1,8 @@
 resources:
-- configmap.yaml
-- deployment.yaml
-- pvc.yaml
-- secrets.yaml
-- service.yaml
+  - deployment.yaml
+  - pvc.yaml
+  - ingress.yaml
+  - secrets.yaml
+  - service.yaml
 commonLabels:
   common-app: grafana
