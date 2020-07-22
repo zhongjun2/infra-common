@@ -1,0 +1,7 @@
+resources:
+- deployment.yaml
+- pvc.yaml
+- secrets.yaml
+- namespace.yaml
+commonLabels:
+  common-app: om
