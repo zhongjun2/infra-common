@@ -14,3 +14,4 @@ data:
   proxy-connect-timeout: "70"
   keep-alive: "10"
   client-body-buffer-size: "64k"
+  add-headers: "ingress-nginx/custom-headers"

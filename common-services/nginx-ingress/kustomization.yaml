@@ -1,6 +1,7 @@
 resources:
 - install-nginx.yaml
 - default-backend.yaml
+- custom-headers.yaml
 commonLabels:
   common-app: nginx-ingress
 patchesStrategicMerge:
