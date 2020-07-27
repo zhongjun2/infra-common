@@ -1,0 +1,15 @@
+resources:
+  - ingress.yaml
+  - namespace.yaml
+  - service.yaml
+commonLabels:
+  app: control-om-grafana
+patchesJson6902:
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: om-grafana-internal
+    path: selector.yaml
+namespace: om
+

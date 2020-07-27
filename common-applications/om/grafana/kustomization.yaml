@@ -1,6 +1,5 @@
 resources:
   - ../../../common-services/grafana
-  - ingress.yaml
   - namespace.yaml
 commonLabels:
   app: control-om-grafana
