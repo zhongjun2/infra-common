@@ -1,0 +1,16 @@
+
+## define the om-collect volume
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: om-collect
+  namespace: om
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 300Gi
+  storageClassName: ssd
+  volumeMode: Filesystem

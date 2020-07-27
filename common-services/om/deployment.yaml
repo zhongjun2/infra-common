@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: om-collect
+  namespace: om
+  labels:
+    app: om-collect
+spec:
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        app: om-collect
+    spec:
+      containers:
+      - name: om-collect
+        image: swr.cn-north-4.myhuaweicloud.com/om/om-collect:0.0.1
+        ports:
+        - containerPort: 3306
+          name: om-collect
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 2560Mi
+        volumeMounts:
+        - mountPath: /var/lib/elasticsearch
+          subPath: om-collect
+          name: storage
+        - mountPath: /override.cfg
+          subPath: credentials_cfg
+          name: om-collect-secrets-volume
+        - mountPath: /projects.json
+          subPath: projects_json
+          name: om-collect-secrets-volume
+      volumes:
+      - name: om-collect-secrets-volume
+        secret:
+          secretName: om-secrets
+      - name: storage
+        persistentVolumeClaim:
+          claimName: om-collect
