@@ -8,9 +8,9 @@ metadata:
   namespace: om
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 300Gi
+      storage: 200Gi
   storageClassName: ssd
   volumeMode: Filesystem
