@@ -1,0 +1,4 @@
+resources:
+  - git
+  - namespace.yaml
+namespace: openeuler-om
