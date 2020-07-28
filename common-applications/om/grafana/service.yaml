@@ -7,3 +7,4 @@ spec:
     - name: http
       nodePort: 31920
       port: 80
+  type: NodePort
