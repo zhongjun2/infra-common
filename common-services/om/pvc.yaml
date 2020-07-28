@@ -12,5 +12,5 @@ spec:
   resources:
     requests:
       storage: 200Gi
-  storageClassName: ssd
+  storageClassName: csi-disk-sas
   volumeMode: Filesystem
