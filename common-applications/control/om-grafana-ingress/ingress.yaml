@@ -15,6 +15,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: grafana
+              serviceName: om-grafana-internal
               servicePort: 80
             path: /
