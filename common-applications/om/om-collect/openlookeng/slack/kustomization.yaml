@@ -2,6 +2,7 @@ resources:
   - ../../../../../common-services/om
 patchesStrategicMerge:
   - secrets.yaml
+  - deployment.yaml
 images:
   - name: swr.cn-north-4.myhuaweicloud.com/om/om-collect:0.0.1
     newName: swr.cn-north-4.myhuaweicloud.com/om/om-collect
