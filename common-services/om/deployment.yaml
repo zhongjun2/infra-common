@@ -19,9 +19,6 @@ spec:
         - containerPort: 3306
           name: om-collect
         volumeMounts:
-        - mountPath: /var/lib/elasticsearch
-          subPath: om-collect
-          name: storage
         - mountPath: /override.cfg
           subPath: credentials_cfg
           name: om-collect-secrets-volume
@@ -32,6 +29,3 @@ spec:
       - name: om-collect-secrets-volume
         secret:
           secretName: om-secrets
-      - name: storage
-        persistentVolumeClaim:
-          claimName: om-collect

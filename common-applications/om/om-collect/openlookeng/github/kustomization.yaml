@@ -9,7 +9,6 @@ patches:
       name: om-collect
 patchesStrategicMerge:
   - secrets.yaml
-  - vpc.yaml
 images:
   - name: swr.cn-north-4.myhuaweicloud.com/om/om-collect
     newName: swr.cn-north-4.myhuaweicloud.com/om/om-collection

@@ -1,6 +1,5 @@
 resources:
 - deployment.yaml
-- pvc.yaml
 - secrets.yaml
 commonLabels:
   common-app: om
