@@ -15,6 +15,9 @@ spec:
       containers:
       - name: om-collect
         image: swr.cn-north-4.myhuaweicloud.com/om/om-collect:0.0.1
+        resources:
+          requests:
+            memory: 500Mi
         ports:
         - containerPort: 3306
           name: om-collect

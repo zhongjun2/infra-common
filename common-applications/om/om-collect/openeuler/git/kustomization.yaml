@@ -2,5 +2,6 @@ resources:
   - ../../../../../common-services/om
 patchesStrategicMerge:
   - secrets.yaml
+  - deployment.yaml
 namePrefix: git-
 namespace: openeuler-om
