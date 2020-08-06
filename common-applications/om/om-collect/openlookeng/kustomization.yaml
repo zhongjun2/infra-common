@@ -3,5 +3,7 @@ resources:
   - slack
   - github
   - website
+  - gitee
+  - download
   - namespace.yaml
 namespace: openlookeng-om
