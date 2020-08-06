@@ -2,5 +2,6 @@ resources:
   - git
   - slack
   - github
+  - website
   - namespace.yaml
 namespace: openlookeng-om
