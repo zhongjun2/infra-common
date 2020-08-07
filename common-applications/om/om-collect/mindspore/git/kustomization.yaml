@@ -1,6 +1,4 @@
 resources:
   - ../../../../../common-services/om
-  - namespace.yaml
 patchesStrategicMerge:
   - secrets.yaml
-namespace: mindspore-om

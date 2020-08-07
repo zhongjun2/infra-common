@@ -1,2 +1,8 @@
 resources:
   - git
+  - github
+  - website
+  - gitee
+  - download
+  - namespace.yaml
+namespace: mindspore-om
