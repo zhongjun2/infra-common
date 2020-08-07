@@ -1,2 +1,10 @@
 resources:
   - git
+  - github
+  - website
+  - gitee
+  - download
+  - package
+  - blog
+  - namespace.yaml
+namespace: opengauss-om
