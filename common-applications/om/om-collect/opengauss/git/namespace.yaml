@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    name: opengauss-om-git
-  name: opengauss-om-git
