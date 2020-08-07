@@ -1,4 +1,7 @@
 resources:
   - git
+  - gitee
+  - github
+  - website
   - namespace.yaml
 namespace: openeuler-om
