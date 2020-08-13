@@ -1,0 +1,6 @@
+resources:
+  - ../../../../../common-services/om
+patchesStrategicMerge:
+  - secrets.yaml
+  - deployment.yaml
+namePrefix: src-git-
