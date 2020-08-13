@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: om-collect
+  namespace: om
+  labels:
+    app: om-collect
+spec:
+  template:
+    spec:
+      containers:
+      - name: om-collect
+        resources:
+          requests:
+            memory: 4000Mi
+      volumes:
+      - name: om-collect-secrets-volume
+        secret:
+          secretName: src-git-om-secrets

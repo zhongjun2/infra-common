@@ -1,7 +1,9 @@
 resources:
   - git
+  - src-git
   - gitee
   - github
   - website
+  - cloudeye
   - namespace.yaml
 namespace: openeuler-om
