@@ -31,7 +31,7 @@ spec:
               key: password
               name: grafana-secrets
         - name: GF_INSTALL_PLUGINS
-          value: grafana-clock-panel,grafana-worldmap-panel,grafana-piechart-panel
+          value: grafana-clock-panel,grafana-piechart-panel
         readinessProbe:
           failureThreshold: 10
           httpGet:
