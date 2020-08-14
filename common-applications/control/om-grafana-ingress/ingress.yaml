@@ -4,14 +4,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-issuer
-  name: om-test-ingress
+  name: om-ingress
 spec:
   tls:
     - hosts:
-        - om-test.osinfra.cn
+        - om.osinfra.cn
       secretName: grafana-tls
   rules:
-    - host: om-test.osinfra.cn
+    - host: om.osinfra.cn
       http:
         paths:
           - backend:
