@@ -6,5 +6,4 @@ resources:
   - download
   - maillist
   - namespace.yaml
-  - gitee-star
 namespace: mindspore-om
