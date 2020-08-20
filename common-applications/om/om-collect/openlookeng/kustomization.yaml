@@ -5,6 +5,7 @@ resources:
   - website
   - gitee
   - download
+  - maillist
   - namespace.yaml
   - gitee-star
 namespace: openlookeng-om
