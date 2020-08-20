@@ -5,5 +5,4 @@ resources:
   - gitee
   - download
   - namespace.yaml
-  - gitee-star
 namespace: mindspore-om
