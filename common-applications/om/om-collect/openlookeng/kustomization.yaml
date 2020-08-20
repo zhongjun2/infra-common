@@ -6,4 +6,5 @@ resources:
   - gitee
   - download
   - namespace.yaml
+  - gitee-star
 namespace: openlookeng-om

@@ -7,4 +7,5 @@ resources:
   - package
   - blog
   - namespace.yaml
+  - gitee-star
 namespace: opengauss-om
