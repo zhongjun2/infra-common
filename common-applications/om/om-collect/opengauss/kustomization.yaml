@@ -6,6 +6,7 @@ resources:
   - download
   - package
   - blog
+  - maillist
   - namespace.yaml
   - gitee-star
 namespace: opengauss-om
