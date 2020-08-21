@@ -6,4 +6,5 @@ resources:
   - download
   - maillist
   - namespace.yaml
+  - collect-data
 namespace: mindspore-om
