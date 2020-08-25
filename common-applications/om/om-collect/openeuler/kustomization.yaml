@@ -9,4 +9,6 @@ resources:
   - namespace.yaml
   - gitee-star
   - collect-data
+  - gitee-incubator
+  - gitee-competition
 namespace: openeuler-om
