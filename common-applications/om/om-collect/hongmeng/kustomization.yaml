@@ -1,0 +1,4 @@
+resources:
+  - gitee
+  - namespace.yaml
+namespace: hongmeng-om
