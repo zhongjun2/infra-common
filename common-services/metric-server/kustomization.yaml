@@ -1,0 +1,14 @@
+resources:
+  - components.yaml
+commonLabels:
+  common-app: metric-server
+patchesStrategicMerge:
+  - deployment.yaml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: metrics-server
+      namespace: kube-system
+    path: remove_node_selector.yaml

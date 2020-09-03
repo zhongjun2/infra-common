@@ -1,0 +1,7 @@
+resources:
+  - ../../../common-services/metric-server
+namespace: kube-system
+images:
+  - name: k8s.gcr.io/metrics-server/metrics-server
+    newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/metrics-server-arm64
+    newTag: v0.3.7
