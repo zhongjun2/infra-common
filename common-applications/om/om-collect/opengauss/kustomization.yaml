@@ -9,4 +9,5 @@ resources:
   - maillist
   - namespace.yaml
   - gitee-star
+  - collect-data
 namespace: opengauss-om
