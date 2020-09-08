@@ -1,12 +1,15 @@
 resources:
-  - ingress.yaml
-  - namespace.yaml
-  - configmap.yaml
-  - deployment.yaml
-  - service.yaml
-  - secrets.yaml
+- ingress.yaml
+- namespace.yaml
+- configmap.yaml
+- deployment.yaml
+- service.yaml
+- secrets.yaml
 commonLabels:
   app: infrastructure-cla
 namespace: cla
-
-
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui
+  newTag: aebbf8682914e3ad42abd850eab675ecfa8b0159
