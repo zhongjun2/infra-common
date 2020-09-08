@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+  annotations:
+    kubernetes.io/elb.class: union
+    kubernetes.io/elb.id: 3cab7708-c87f-4466-b9b9-b0821d05a92d
+    kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
+spec:
+  #We need set this into 'Local' since we need get the client IP of elb.
+  externalTrafficPolicy: Local
+
+  
