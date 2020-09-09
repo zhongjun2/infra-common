@@ -5,6 +5,7 @@ resources:
 - deployment.yaml
 - service.yaml
 - secrets.yaml
+- pvc.yaml
 commonLabels:
   app: infrastructure-cla
 namespace: cla

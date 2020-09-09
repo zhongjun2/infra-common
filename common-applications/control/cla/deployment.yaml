@@ -22,6 +22,36 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
+          env:
+            - name: MONGODB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: cla-secrets
+                  key: mongodb-connection
+            - name: API_TOKEN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cla-secrets
+                  key: api-token-key
+            - name: HTTP_PORT
+              value: 80
+          volumeMounts:
+            - mountPath: /opt/app/conf/pdfs
+              name: data-volume
+            - mountPath: /opt/app/conf/platforms/email.yaml
+              subPath: email
+              name: secret-volume
+            - mountPath: /opt/app/conf/platforms/code_platforms.yaml
+              subPath: code-platforms
+              name: secret-volume
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: cla-data-vol
+        - name: secret-volume
+          secret:
+            secretName: cla-secrets
+
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
