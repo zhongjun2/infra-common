@@ -41,7 +41,7 @@ spec:
             - mountPath: /opt/app/conf/platforms/email.yaml
               subPath: email
               name: secret-volume
-            - mountPath: /opt/app/conf/platforms/gmail.yaml
+            - mountPath: /opt/app/conf/platforms/gmail.json
               subPath: gmail
               name: secret-volume
             - mountPath: /opt/app/conf/platforms/code_platforms.yaml
