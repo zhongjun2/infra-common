@@ -35,6 +35,8 @@ spec:
                   key: api-token-key
             - name: HTTP_PORT
               value: "80"
+            - name: RUN_MODE
+              value: dev
           volumeMounts:
             - mountPath: /opt/app/conf/pdfs
               name: data-volume

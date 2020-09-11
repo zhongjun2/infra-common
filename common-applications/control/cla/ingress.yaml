@@ -18,3 +18,7 @@ spec:
               serviceName: claservice
               servicePort: 80
             path: /
+          - backend:
+              serviceName: cla-backend-service
+              servicePort: 80
+            path: /v1
