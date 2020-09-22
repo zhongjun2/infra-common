@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  name: cla-ingress
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: cla-ingress-backend
 spec:
   tls:
     - hosts:
@@ -14,6 +15,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: claservice
+              serviceName: cla-backend-service
               servicePort: 80
-            path: /
+            path: /api(/|$)(.*)
