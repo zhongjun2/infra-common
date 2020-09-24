@@ -7,4 +7,5 @@ resources:
   - maillist
   - namespace.yaml
   - collect-data
+  - transform-data
 namespace: mindspore-om

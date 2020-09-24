@@ -9,4 +9,5 @@ resources:
   - namespace.yaml
   - gitee-star
   - collect-data
+  - transform-data
 namespace: openlookeng-om
