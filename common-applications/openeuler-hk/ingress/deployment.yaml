@@ -8,7 +8,7 @@ spec:
   template:
     spec:
       nodeSelector:
-        nginx: "true"
+        ingress: "true"
       containers:
         - name: nginx-ingress-controller
           resources:
