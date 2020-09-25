@@ -1,0 +1,3 @@
+resources:
+  - tansform-data
+namespace: opengauss-om

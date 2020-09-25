@@ -1,0 +1,3 @@
+resources:
+  - transform-data
+namespace: mindspore-om

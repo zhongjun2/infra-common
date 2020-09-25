@@ -10,4 +10,5 @@ resources:
   - namespace.yaml
   - gitee-star
   - collect-data
+  - gitee-event
 namespace: opengauss-om

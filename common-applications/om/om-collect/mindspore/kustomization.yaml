@@ -7,4 +7,5 @@ resources:
   - maillist
   - namespace.yaml
   - collect-data
+  - gitee-event
 namespace: mindspore-om
