@@ -12,4 +12,5 @@ resources:
   - gitee-incubator
   - gitee-competition
   - transform-data
+  - gitee-event
 namespace: openeuler-om

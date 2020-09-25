@@ -8,4 +8,5 @@ resources:
   - namespace.yaml
   - collect-data
   - transform-data
+  - gitee-event
 namespace: mindspore-om

@@ -10,4 +10,5 @@ resources:
   - gitee-star
   - collect-data
   - transform-data
+  - gitee-event
 namespace: openlookeng-om

@@ -11,4 +11,5 @@ resources:
   - gitee-star
   - collect-data
   - tansform-data
+  - gitee-event
 namespace: opengauss-om
