@@ -1,14 +1,3 @@
 resources:
-  - git
-  - github
-  - website
-  - gitee
-  - download
-  - package
-  - blog
-  - maillist
-  - namespace.yaml
-  - gitee-star
-  - collect-data
   - tansform-data
 namespace: opengauss-om

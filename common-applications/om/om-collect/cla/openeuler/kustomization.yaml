@@ -1,15 +1,3 @@
 resources:
-  - git
-  - src-git
-  - gitee
-  - github
-  - website
-  - cloudeye
-  - maillist
-  - namespace.yaml
-  - gitee-star
-  - collect-data
-  - gitee-incubator
-  - gitee-competition
   - transform-data
 namespace: openeuler-om
