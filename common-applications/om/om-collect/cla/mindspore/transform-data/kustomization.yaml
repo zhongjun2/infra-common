@@ -1,5 +1,5 @@
 resources:
-  - ../../../../../common-services/om
+  - ../../../../../../common-services/om
 patches:
   - path: deploy.json
     target:

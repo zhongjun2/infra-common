@@ -1,0 +1,11 @@
+resources:
+  - git
+  - github
+  - website
+  - gitee
+  - download
+  - maillist
+  - namespace.yaml
+  - collect-data
+  - transform-data
+namespace: mindspore-om
