@@ -1,3 +1,4 @@
 resources:
   - tansform-data
+  - namespace.yaml
 namespace: opengauss-om
