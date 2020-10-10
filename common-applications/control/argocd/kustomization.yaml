@@ -1,6 +1,7 @@
 resources:
   - ../../../common-services/argocd
   - ingress.yaml
+  - secrets.yaml
 commonLabels:
   app: control-argocd
 patchesStrategicMerge:

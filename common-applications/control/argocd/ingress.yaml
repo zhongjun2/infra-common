@@ -3,13 +3,12 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
   name: argocd
 spec:
   tls:
     - hosts:
         - build.osinfra.cn
-      secretName: argo-cd-tls
+      secretName: tls-secrets
   rules:
     - host: build.osinfra.cn
       http:
