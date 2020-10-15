@@ -21,6 +21,7 @@ spec:
             - --github-user=TommyLike,GeorgeCao-hw,zengchen1024,zhongjun2
             - --upstream=file:///dev/null
             - --http-address=0.0.0.0:4180
+            - --cookie-expire=0h10m0s
           env:
             - name: OAUTH2_PROXY_CLIENT_ID
               valueFrom:
