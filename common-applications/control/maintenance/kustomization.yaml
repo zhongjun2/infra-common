@@ -1,14 +1,13 @@
 resources:
-- https://github.com/opensourceways/app-kubernetes-maintenance/deploy?ref=master
-- ingress.yaml
-- secrets.yaml
+  - https://github.com/opensourceways/app-kubernetes-maintenance/deploy?ref=master
+  - ingress.yaml
+  - secrets.yaml
+  - oauth-proxy.yaml
 commonLabels:
   app: control-maintenance
 namespace: maintenance
 patchesStrategicMerge:
-- deployment.yaml
+  - deployment.yaml
 images:
-- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/maintenance-server
-  newTag: 4e9cbd8193f30ddcc2c8f587b1f1d0cecf83ae88
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+  - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/maintenance-server
+    newTag: 1963d3a47b2b990908837dd6adaabb464ead5633
