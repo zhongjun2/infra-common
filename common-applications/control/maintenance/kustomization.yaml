@@ -1,13 +1,13 @@
 resources:
-- https://github.com/opensourceways/app-kubernetes-maintenance/deploy?ref=master
+- ./admin
+- ./developer
 - ingress.yaml
 - secrets.yaml
 - oauth-proxy.yaml
+- nginx-route.yaml
 commonLabels:
   app: control-maintenance
 namespace: maintenance
-patchesStrategicMerge:
-- deployment.yaml
 images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/maintenance-server
   newTag: a591e1d2568d0a56c700e714aca866e8963aabb0

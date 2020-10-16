@@ -1,0 +1,15 @@
+# Deployment for maintenance service
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: maintenance-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: maintenance-server
+          env:
+            # expose k9s to our admin
+            - name: START_CMD
+              value: "k9s"
