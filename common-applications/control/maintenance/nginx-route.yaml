@@ -55,6 +55,19 @@ data:
         	if ($http_x_auth_request_user = "TommyLike") {
               proxy_pass http://admin-maintenance-service.maintenance.svc;
             }
+
+            if ($http_x_auth_request_user = "zhongjun2") {
+              proxy_pass http://admin-maintenance-service.maintenance.svc;
+            }
+
+            if ($http_x_auth_request_user = "zengchen1024") {
+              proxy_pass http://admin-maintenance-service.maintenance.svc;
+            }
+
+            if ($http_x_auth_request_user = "GeorgeCao-hw") {
+              proxy_pass http://admin-maintenance-service.maintenance.svc;
+            }
+
             proxy_pass http://developer-maintenance-service.maintenance.svc;
         }
         #error_page  404              /404.html;
