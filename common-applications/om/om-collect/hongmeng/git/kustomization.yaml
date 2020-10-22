@@ -1,0 +1,4 @@
+resources:
+  - ../../../../../common-services/om
+patchesStrategicMerge:
+  - secrets.yaml
