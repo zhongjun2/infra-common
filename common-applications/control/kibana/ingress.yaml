@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: kibana
+spec:
+  tls:
+    - hosts:
+        - kibana.osinfra.cn
+      secretName: tls-secrets
+  rules:
+    - host: kibana.osinfra.cn
+      http:
+        paths:
+          - backend:
+              serviceName: kibana
+              servicePort: 80
+            path: /
