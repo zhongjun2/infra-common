@@ -10,6 +10,16 @@ spec:
       containers:
         - name: maintenance-server
           env:
+            - name: TTYD_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: ttyd_username
+                  name: cluster-config-secrets
+            - name: TTYD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ttyd_password
+                  name: cluster-config-secrets
             # expose k9s to our admin
             - name: START_CMD
               value: "k9s"
