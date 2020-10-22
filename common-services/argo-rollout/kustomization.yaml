@@ -1,4 +1,3 @@
 resources:
-  - install-argo-rollout.yaml
-commonLabels:
-  common-app: argocd-rollout
+  - clusteranalysistemplates
+  - install
