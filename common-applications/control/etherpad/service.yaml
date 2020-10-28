@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: etherpad-lite
 spec:
+  type: ClusterIP
   ports:
     - name: ether-http
       port: 80

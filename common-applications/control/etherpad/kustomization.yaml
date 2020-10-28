@@ -9,4 +9,11 @@ patchesStrategicMerge:
   - configmap.yaml
   - pvc.yaml
   - service.yaml
+patchesJson6902:
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: etherpad-lite
+    path: remove-traffic-strategy.yaml
 namespace: etherpad
