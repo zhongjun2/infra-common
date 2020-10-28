@@ -38,3 +38,9 @@ spec:
                 secretKeyRef:
                   key: jenkins-admin-user
                   name: osinfra-jenkins
+          # NOTE(tommylikehu): Copy config file not working when jenkins upgraded, disable it here via command overwrite.
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sleep 1;
