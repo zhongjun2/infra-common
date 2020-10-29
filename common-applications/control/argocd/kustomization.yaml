@@ -1,5 +1,6 @@
 resources:
   - ../../../common-services/argocd
+  - ../../../common-services/argo-notifications
   - ingress.yaml
   - secrets.yaml
 commonLabels:
