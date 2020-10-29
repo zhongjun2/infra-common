@@ -79,20 +79,6 @@ data:
               - 提交信息: {{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: argocd-notifications-secret
-type: Opaque
-stringData:
-  notifiers.yaml: |
-    email:
-      host: smtp.gmail.com
-      port: 587
-      from: public@openeuler.io
-      username: public@openeuler.io
-      password: ahdwaabunsuqezeu
----
-apiVersion: v1
 kind: Service
 metadata:
   labels:
