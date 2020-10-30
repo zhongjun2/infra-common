@@ -22,6 +22,13 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p /opt/app/conf/pdfs/org_signature_pdf
+              mkdir -p /opt/app/conf/pdfs/output
+              /opt/app/cla-server
           env:
             - name: MONGODB_CONNECTION
               valueFrom:
