@@ -65,9 +65,9 @@ data:
         template: chinese-app-template
     templates:
       - name: chinese-app-template
-        title: "【基础设施运维】应用{{.app.metadata.name}}同步异常，当前状态是:{{.app.status.sync.status}}"
+        title: "【基础设施运维】应用{{.app.metadata.name}}同步异常，当前状态是:{{.app.status.health.status}}"
         body: |
-            应用{{.app.metadata.name}}同步异常, 当前同步状态是:{{.app.status.sync.status}}，请参考下面的信息，及时解决。
+            应用{{.app.metadata.name}}同步异常, 当前同步状态是:{{.app.status.health.status}}，请参考下面的信息，及时解决。
             访问地址: https://build.osinfra.cn/applications/{{.app.metadata.name}}
             项目信息:
               - 代码仓库: {{.app.spec.source.repoURL}}
