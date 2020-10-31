@@ -6,6 +6,8 @@ metadata:
 # those ports will be exposed via ingress service
 # 30873  download.mindspore.cn's repo server port
 # 30022  download.mindspore.cn's ssh port
+# 50000 build.mindspore.cn's jenkins tunnel port
 data:
   30873: "download/repo-service:873"
   30022: "download/repo-service:22"
+  50000: "jenkins/mindspore-jenkins:50000"
