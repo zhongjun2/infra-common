@@ -22,7 +22,7 @@ spec:
             - --github-team=administrator,developer
             - --upstream=file:///dev/null
             - --http-address=0.0.0.0:4180
-            - --cookie-expire=0h10m0s
+            - --cookie-expire=6h0m0s
             - --set-xauthrequest=true
           env:
             - name: OAUTH2_PROXY_CLIENT_ID
