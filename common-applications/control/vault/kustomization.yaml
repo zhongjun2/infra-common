@@ -3,6 +3,7 @@ resources:
   - namespace.yaml
   - pvc.yaml
   - ingress.yaml
+  - secrets.yaml
 commonLabels:
   app: control-vault
 namespace: vault
