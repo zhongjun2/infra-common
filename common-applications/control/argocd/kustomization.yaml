@@ -3,6 +3,7 @@ resources:
   - ../../../common-services/argo-notifications
   - ingress.yaml
   - secrets.yaml
+  - oauth-proxy.yaml
 commonLabels:
   app: control-argocd
 patchesStrategicMerge:
