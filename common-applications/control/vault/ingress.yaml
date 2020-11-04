@@ -20,6 +20,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: standalone-vault
-              servicePort: 8200
+              serviceName: oauth2-proxy
+              servicePort: 4180
             path: /

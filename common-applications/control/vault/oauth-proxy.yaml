@@ -20,7 +20,7 @@ spec:
             - --email-domain=*
             - --github-org=opensourceways
             - --github-team=administrator
-            - --upstream=file:///dev/null
+            - --upstream=http://standalone-vault.vault.svc.cluster.local:8200
             - --http-address=0.0.0.0:4180
             - --cookie-expire=6h0m0s
             - --set-xauthrequest=true
@@ -66,20 +66,20 @@ spec:
 
 ---
 
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: oauth2-proxy
-spec:
-  rules:
-    - host: secret.osinfra.cn
-      http:
-        paths:
-          - backend:
-              serviceName: oauth2-proxy
-              servicePort: 4180
-            path: /oauth2
-  tls:
-    - hosts:
-        - secret.osinfra.cn
-      secretName: vault-tls
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+#  name: oauth2-proxy
+#spec:
+#  rules:
+#    - host: secret.osinfra.cn
+#      http:
+#        paths:
+#          - backend:
+#              serviceName: oauth2-proxy
+#              servicePort: 4180
+#            path: /oauth2
+#  tls:
+#    - hosts:
+#        - secret.osinfra.cn
+#      secretName: vault-tls
