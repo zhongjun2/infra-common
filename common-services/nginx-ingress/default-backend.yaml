@@ -41,6 +41,9 @@ spec:
       containers:
         - name: nginx-ingress-default-backend
           image: opensourceway/default_backend:0.0.1
+          env:
+            - name: NODE_ENV
+              value: production
           ports:
             - name: http
               containerPort: 8080
