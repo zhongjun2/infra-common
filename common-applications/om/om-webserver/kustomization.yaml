@@ -1,0 +1,5 @@
+resources
+- deployment.yaml
+- secrets.yaml
+commonLabels
+  common-app om
