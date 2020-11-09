@@ -1,5 +1,6 @@
-resources
+resources:
 - deployment.yaml
 - secrets.yaml
-commonLabels
-  common-app:om-webserver
+- ingress.yaml
+commonLabels:
+  common-app: om-webserver

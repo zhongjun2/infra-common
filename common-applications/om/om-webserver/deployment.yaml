@@ -23,15 +23,15 @@ spec:
           name: om-webserver
         volumeMounts:
         - mountPath: /openEuler.properties  
-          subPath: openEuler.properties
-          name: om-webserver-openEuler.properties
+          subPath: openEuler_properties
+          name: om-webserver-secrets-volume
         - mountPath: /openGauss.properties
-          subPath: openGauss.properties
-          name: om-webserver-openGauss.properties
+          subPath: openGauss_properties
+          name: om-webserver-secrets-volume
         - mountPath: /openLookeng.properties
-          subPath: openLookeng.properties
-          name: om-webserver-openLookeng.properties
+          subPath: openLookeng_properties
+          name: om-webserver-secrets-volume
       volumes:
       - name: om-webserver-secrets-volume
         secret:
-          secretName: om-secrets
+          secretName: om-webserver-secrets
