@@ -2,4 +2,4 @@ resources
 - deployment.yaml
 - secrets.yaml
 commonLabels
-  common-app om
+  common-app:om-webserver
