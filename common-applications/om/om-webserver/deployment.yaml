@@ -22,12 +22,15 @@ spec:
         - containerPort: 8888
           name: om-webserver
         volumeMounts:
-        - mountPath: /override.cfg
-          subPath: credentials_cfg
-          name: om-webserver-secrets-volume
-        - mountPath: /projects.json
-          subPath: projects_json
-          name: om-webserver-secrets-volume
+        - mountPath: /openEuler.properties  
+          subPath: openEuler.properties
+          name: om-webserver-openEuler.properties
+        - mountPath: /openGauss.properties
+          subPath: openGauss.properties
+          name: om-webserver-openGauss.properties
+        - mountPath: /openLookeng.properties
+          subPath: openLookeng.properties
+          name: om-webserver-openLookeng.properties
       volumes:
       - name: om-webserver-secrets-volume
         secret:

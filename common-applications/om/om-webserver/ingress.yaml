@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - clasign.osinfra.cn
+        - omapi.osinfra.cn
       secretName: tls-secrets
   rules:
-    - host: clasign.osinfra.cn
+    - host: omapi.osinfra.cn
       http:
         paths:
           - backend:
