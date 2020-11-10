@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: om-webserver
+  namespace: om
+  labels:
+    app: om-webserver
+spec:
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        app: om-webserver
+    spec:
+      containers:
+      - name: om-webserver
+        image: swr.cn-north-4.myhuaweicloud.com/om/om-webserver:0.0.1
+        resources:
+          requests:
+            memory: 100Mi
+        ports:
+        - containerPort: 8888
+          name: om-webserver
+        volumeMounts:
+        - mountPath: /openEuler.properties  
+          subPath: openEuler_properties
+          name: om-webserver-secrets-volume
+        - mountPath: /openGauss.properties
+          subPath: openGauss_properties
+          name: om-webserver-secrets-volume
+        - mountPath: /openLookeng.properties
+          subPath: openLookeng_properties
+          name: om-webserver-secrets-volume
+      volumes:
+      - name: om-webserver-secrets-volume
+        secret:
+          secretName: om-webserver-secrets
