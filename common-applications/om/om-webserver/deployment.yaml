@@ -22,16 +22,16 @@ spec:
         - containerPort: 8888
           name: om-webserver
         volumeMounts:
-        - mountPath: /openEuler.properties  
+        - mountPath: /var/lib/om-webserver/openEuler.properties  
           subPath: openEuler_properties
           name: om-webserver-secrets-volume
-        - mountPath: /openGauss.properties
+        - mountPath: /var/lib/om-webserver/openGauss.properties
           subPath: openGauss_properties
           name: om-webserver-secrets-volume
-        - mountPath: /openLookeng.properties
+        - mountPath: /var/lib/om-webserver/openLookeng.properties
           subPath: openLookeng_properties
           name: om-webserver-secrets-volume
-        - mountPath: /application.properties
+        - mountPath: /var/lib/om-webserver/application.properties
           subPath: application_properties
           name: om-webserver-secrets-volume
       volumes:
