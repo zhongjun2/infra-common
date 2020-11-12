@@ -31,6 +31,9 @@ spec:
         - mountPath: /openLookeng.properties
           subPath: openLookeng_properties
           name: om-webserver-secrets-volume
+        - mountPath: /application.properties
+          subPath: application_properties
+          name: om-webserver-secrets-volume
       volumes:
       - name: om-webserver-secrets-volume
         secret:
