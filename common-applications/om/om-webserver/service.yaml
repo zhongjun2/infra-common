@@ -9,5 +9,5 @@ spec:
       protocol: TCP
       targetPort: 8888
   selector:
-    component: om-webserver
+    app: om-webserver
   type: ClusterIP
