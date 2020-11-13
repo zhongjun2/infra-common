@@ -1,0 +1,19 @@
+resources:
+- ingress.yaml
+- namespace.yaml
+- configmap.yaml
+- deployment.yaml
+- service.yaml
+- secrets.yaml
+- pvc.yaml
+- ingress-backend.yaml
+commonLabels:
+  app: infrastructure-cla
+namespace: cla-test
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-backend
+  newTag: 507941ee2e90cbb0fcc0424090f5f0d816a0d976
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui
+  newTag: 3397c3349d45979544491b9b7c83f8b6b2bb606e
