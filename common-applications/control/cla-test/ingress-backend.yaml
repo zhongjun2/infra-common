@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - clasign.osinfra.cn
+        - test-clasign.osinfra.cn
       secretName: tls-secrets
   rules:
-    - host: clasign.osinfra.cn
+    - host: test-clasign.osinfra.cn
       http:
         paths:
           - backend:
