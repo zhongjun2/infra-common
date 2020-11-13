@@ -35,6 +35,10 @@ spec:
                 secretKeyRef:
                   name: cla-secrets
                   key: mongodb-connection
+            - name: CLA_PLATFORM_URL
+              value: "https://test-clasign.osinfra.cn/"
+            - name: MONGODB_NAME
+              value: "cla-test"
             - name: API_TOKEN_KEY
               valueFrom:
                 secretKeyRef:
