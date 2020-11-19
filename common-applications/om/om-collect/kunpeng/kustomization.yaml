@@ -1,0 +1,6 @@
+resources:
+  - git
+  - github
+  - gitee
+  - namespace.yaml
+namespace: kunpeng-om
