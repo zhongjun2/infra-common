@@ -1,0 +1,9 @@
+resources:
+  - ingress.yaml
+  - mailman.yaml
+  - namespace.yaml
+  - secrets.yaml
+commonLabels:
+  app: osinfra-api
+namespace: osinfra-api
+

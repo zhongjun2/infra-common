@@ -17,3 +17,17 @@ spec:
               serviceName: mailman-web-service
               servicePort: 80
             path: /
+    - host: mailweb.openhetuengine.org
+      http:
+        paths:
+          - backend:
+              serviceName: mailman-web-service
+              servicePort: 80
+            path: /
+    - host: mailweb.openhetuengine.org
+      http:
+        paths:
+          - backend:
+              serviceName: mailman-web-service
+              servicePort: 80
+            path: /

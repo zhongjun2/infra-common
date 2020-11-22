@@ -10,7 +10,7 @@ data:
     # Place this file at
     # /etc/exim4/conf.d/main/25_mm3_macros
 
-    domainlist mm3_domains=lists.osinfra.cn
+    domainlist mm3_domains=lists.osinfra.cn:lists.openhetuengine.org:lists.george-cao.site
     MM3_LMTP_HOST=mailman-core-0.mail-suit-service.mail.svc.cluster.local
     MM3_LMTP_PORT=8024
     # According to the configuration of: https://mailman.readthedocs.io/en/release-3.0/src/mailman/docs/MTA.html
@@ -28,7 +28,7 @@ data:
   00_local_macros: |
     DKIM_CANON = relaxed
     DKIM_SELECTOR = default
-    DKIM_DOMAIN = lists.osinfra.cn
+    DKIM_DOMAIN = ${lc:${domain:$h_from:}}
     DKIM_FILE = /etc/exim4/dkim/lists.osinfra.cn.key
     DKIM_PRIVATE_KEY=${if exists{DKIM_FILE}{DKIM_FILE}{0}}
     MAIN_LOG_SELECTOR = +subject +deliver_time +received_sender +return_path_on_delivery +sender_on_delivery +unknown_in_list +smtp_protocol_error +smtp_syntax_error +tls_certificate_verified +tls_peerdn -host_lookup_failed
@@ -208,7 +208,7 @@ data:
 
   update-exim4-conf.conf: |
     dc_eximconfig_configtype='internet'
-    dc_other_hostnames='lists.osinfra.cn;'
+    dc_other_hostnames='lists.osinfra.cn;lists.openhetuengine.org;lists.george-cao.site'
     dc_local_interfaces=''
     dc_readhost=''
     dc_relay_domains=''
@@ -229,12 +229,66 @@ metadata:
   name: mailman-web-configmap
   namespace: mail
 data:
+  uwsgi.ini: |
+    [uwsgi]
+    # Port on which uwsgi will be listening.
+    uwsgi-socket = 0.0.0.0:8080
+    # http-socket = 0.0.0.0:8000
+
+    #Enable threading for python
+    enable-threads = true
+
+    # Move to the directory wher the django files are.
+    chdir = /opt/mailman-web
+
+    # Use the wsgi file provided with the django project.
+    wsgi-file = wsgi.py
+
+    # Setup default number of processes and threads per process.
+    master = true
+    process = 4
+
+    # Drop privielges and don't run as root.
+    uid = mailman
+    gid = mailman
+
+    # Setup the django_q related worker processes.
+    attach-daemon = ./manage.py qcluster
+
+    # Setup hyperkitty's cron jobs.
+    # 'minutely' jobs are run hourly for perf reasons.
+    # See https://github.com/maxking/docker-mailman/issues/327
+    # unique-cron = 0 -1 -1 -1 -1 ./manage.py runjobs minutely
+    unique-cron = -15 -1 -1 -1 -1 ./manage.py runjobs quarter_hourly
+    unique-cron = 0 -1 -1 -1 -1 ./manage.py runjobs hourly
+    unique-cron = 0 0 -1 -1 -1 ./manage.py runjobs daily
+    unique-cron = 0 0 1 -1 -1 ./manage.py runjobs monthly
+    unique-cron = 0 0 -1 -1 0 ./manage.py runjobs weekly
+    unique-cron = 0 0 1 1 -1 ./manage.py runjobs yearly
+
+    # Setup the request log.
+    req-logger = file:/opt/mailman-web-data/logs/uwsgi.log
+
+    # Log cron seperately.
+    logger = cron file:/opt/mailman-web-data/logs/uwsgi-cron.log
+    log-route = cron uwsgi-cron
+
+    # Log qcluster commands seperately.
+    logger = qcluster file:/opt/mailman-web-data/logs/uwsgi-qcluster.log
+    log-route = qcluster uwsgi-daemons
+
+    # Last log and it logs the rest of the stuff.
+    logger = file:/opt/mailman-web-data/logs/uwsgi-error.log
   settings_local.py: |
     import os
     import socket
     import ipaddress
 
-    DEBUG = False
+    DEBUG = True
+
+    SITE_ID = 1
+
+    FILTER_VHOST = True
 
     TIME_ZONE = "Asia/Shanghai"
 
@@ -244,29 +298,15 @@ data:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 25
-    
-    mailman_ip_address = socket.gethostbyname(os.environ.get('MAILMAN_HOST_IP')).split('.')
-    mailman_ip_cidr = "{0}.{1}.0.0/16".format(mailman_ip_address[0], mailman_ip_address[1])
-    MAILMAN_ARCHIVER_FROM = [str(ip) for ip in ipaddress.IPv4Network(mailman_ip_cidr)]
-
-    SERVICE_IP = socket.gethostbyname("mailweb.osinfra.cn")
 
     ALLOWED_HOSTS = [
-        "localhost",  # Archiving API from Mailman, keep it.
-        # Add here all production URLs you may have.
-        "mailman-database-0.mail-suit-service.mail.svc.cluster.local",
-        "mailman-core-0.mail-suit-service.mail.svc.cluster.local",
-        "mailman-web-0.mail-suit-service.mail.svc.cluster.local",
-        "mailman-web-service.mail.svc.cluster.local",
-        #NOTE: This is the public ip address of the served host
-        "osinfra.cn",
-        #NOTE: this can be removed if domain name finally get used.
-        "49.4.27.171",
-        "mailweb.osinfra.cn",
-        "mailman-web",
-        SERVICE_IP,
+        "localhost",
+        "0.0.0.0",
+        "127.0.0.1",
         os.environ.get('SERVE_FROM_DOMAIN'),
         os.environ.get('DJANGO_ALLOWED_HOSTS'),
+        "mailweb.osinfra.cn",
+        "mailweb.openhetuengine.org"
     ]
 
     COMPRESS_CSS_HASHING_METHOD = 'content'

@@ -13,16 +13,14 @@ data:
         root /opt/mailman-web-data;
         index index.html;
 
-        server_name mailweb.osinfra.cn;
-
         location /static {
-        alias /opt/mailman-web-data/static;
+          alias /opt/mailman-web-data/static;
         }
 
         location / {
-        uwsgi_pass 127.0.0.1:8080;
-        include uwsgi_params;
-        uwsgi_read_timeout 300;
+            uwsgi_pass 0.0.0.0:8080;
+            include uwsgi_params;
+            uwsgi_read_timeout 300;
         }
     }
   nginx.conf : |
@@ -31,7 +29,6 @@ data:
 
     error_log  /var/log/nginx/error.log warn;
     pid        /var/run/nginx.pid;
-
 
     events {
         worker_connections  2048;
@@ -49,9 +46,7 @@ data:
         access_log  /var/log/nginx/access.log  main;
 
         sendfile        on;
-
         keepalive_timeout  65;
-
         gzip  on;
 
         include /etc/nginx/conf.d/*.conf;
