@@ -22,4 +22,4 @@ spec:
                   name: cluster-config-secrets
             # expose k9s to our admin
             - name: START_CMD
-              value: "k9s"
+              value: "k9s --readonly"
