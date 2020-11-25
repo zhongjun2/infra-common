@@ -11,6 +11,7 @@ spec:
         ingress: "true"
       containers:
         - name: nginx-ingress-controller
+          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           resources:
             requests:
               cpu: 4000m
