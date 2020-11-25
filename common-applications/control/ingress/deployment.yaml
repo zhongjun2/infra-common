@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
         - name: nginx-ingress-controller
-          image: k8s.gcr.io/ingress-nginx/controller:v0.35.0
+          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           resources:
             requests:
               cpu: 1000m
