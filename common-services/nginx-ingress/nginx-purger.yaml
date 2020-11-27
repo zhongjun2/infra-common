@@ -48,6 +48,17 @@ spec:
       containers:
         - name: nginx-ingress-purger
           image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/nginx-purger:9cf83c59d48420f5f2182919d7eaae013f7156e5
+          env:
+            - name: BASIC_AUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-purger-secrets
+                  key: username
+            - name: BASIC_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-purger-secrets
+                  key: password
           ports:
             - name: http
               containerPort: 8080
@@ -85,3 +96,17 @@ spec:
       port: 80
       protocol: TCP
       targetPort: http
+---
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: nginx-purger-secrets
+spec:
+  name: nginx-purger-secrets
+  keysMap:
+    username:
+      path: secrets/data/infra-common/nginx-purger
+      key: username
+    password:
+      path: secrets/data/infra-common/nginx-purger
+      key: password
