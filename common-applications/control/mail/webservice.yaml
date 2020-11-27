@@ -137,7 +137,7 @@ spec:
               name: mailman-web-volume
       #NOTE: Empty dir can't be used in a production dir. Please upgrade it before using.
       volumes:
-      - name: mailman-web-volume
+        - name: mailman-web-volume
           emptyDir: {}
         - name: mailman-web-configmap-volume
           configMap:
