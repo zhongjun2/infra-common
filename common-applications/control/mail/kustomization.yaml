@@ -1,0 +1,16 @@
+resources:
+  - config.yaml
+  - maildatabase.yaml
+  - mailcore.yaml
+  - mailcoreservice.yaml
+  - mtaservice.yaml
+  - namespace.yaml
+  - nginx-config.yaml
+  - secrets.yaml
+  - storage.yaml
+  - suiteservice.yaml
+  - webservice.yaml
+  - ingress.yaml
+namespace: mail
+commonLabels:
+  solution: control-maillist

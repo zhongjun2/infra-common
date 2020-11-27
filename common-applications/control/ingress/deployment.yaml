@@ -9,6 +9,7 @@ spec:
     spec:
       containers:
         - name: nginx-ingress-controller
+          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           resources:
             requests:
               cpu: 1000m
@@ -25,3 +26,11 @@ spec:
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --maxmind-license-key=TtutIbyHcPwZNxNX
             - --default-backend-service=ingress-nginx/ingress-default-backend
+          volumeMounts:
+            - mountPath: /tmp/statics_cache
+              name: nginx-proxy-cache
+      volumes:
+        - name: nginx-proxy-cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: "500Mi"

@@ -4,13 +4,14 @@ metadata:
   name: nginx-ingress-controller
   namespace: ingress-nginx
 spec:
-  replicas: 5
+  replicas: 4
   template:
     spec:
       nodeSelector:
         ingress: "true"
       containers:
         - name: nginx-ingress-controller
+          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           resources:
             requests:
               cpu: 4000m
@@ -27,3 +28,11 @@ spec:
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --maxmind-license-key=TtutIbyHcPwZNxNX
             - --default-backend-service=ingress-nginx/ingress-default-backend
+          volumeMounts:
+            - mountPath: /tmp/statics_cache
+              name: nginx-proxy-cache
+      volumes:
+        - name: nginx-proxy-cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: "1000Mi"

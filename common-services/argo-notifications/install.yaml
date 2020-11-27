@@ -1,0 +1,119 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-notifications-controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-notifications-controller
+rules:
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - applications
+      - appprojects
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-notifications-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: argocd-notifications-controller
+subjects:
+  - kind: ServiceAccount
+    name: argocd-notifications-controller
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  config.yaml: |
+    subscriptions:
+    - recipients:
+      - email:hu.husheng@huawei.com
+      - email:george.cao@huawei.com
+      - email:chenzeng2@huawei.com
+      - email:jun.zhongjun@huawei.com
+    triggers:
+      - name: on-sync-status-unknown
+        enabled: true
+        template: chinese-app-template
+      - name: on-health-degraded
+        enabled: true
+        template: chinese-app-template
+      - name: on-sync-failed
+        enabled: true
+        template: chinese-app-template
+    templates:
+      - name: chinese-app-template
+        title: "【基础设施运维】应用{{.app.metadata.name}}同步异常，当前状态是:{{.app.status.health.status}}"
+        body: |
+            应用{{.app.metadata.name}}同步异常, 当前同步状态是:{{.app.status.health.status}}，请参考下面的信息，及时解决。
+            访问地址: https://build.osinfra.cn/applications/{{.app.metadata.name}}
+            项目信息:
+              - 代码仓库: {{.app.spec.source.repoURL}}
+              - 部署集群: {{.app.spec.destination.server}}
+              - 所属社区: {{.app.spec.project}}
+            最近代码变更:
+              - 提交人:   {{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}
+              - 提交时间: {{(call .repo.GetCommitMetadata .app.status.sync.revision).Date}}
+              - 提交信息: {{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-notifications-controller-metrics
+  name: argocd-notifications-controller-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 9001
+      protocol: TCP
+      targetPort: 9001
+  selector:
+    app.kubernetes.io/name: argocd-notifications-controller
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-notifications-controller
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-notifications-controller
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: argocd-notifications-controller
+    spec:
+      containers:
+        - command:
+            - /app/argocd-notifications
+            - controller
+          image: argoprojlabs/argocd-notifications:v0.7.0
+          imagePullPolicy: Always
+          name: argocd-notifications-controller
+          workingDir: /app
+      serviceAccountName: argocd-notifications-controller

@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  http-snippet: |
+    proxy_cache_path /tmp/statics_cache levels=1:2 keys_zone=statics_cache:50m use_temp_path=off max_size=800m inactive=12h;
+kind: ConfigMap
+metadata:
+  name: nginx-configuration
+  namespace: ingress-nginx

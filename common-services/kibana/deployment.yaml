@@ -1,0 +1,52 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kibana
+  labels:
+    component: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: kibana
+  template:
+    metadata:
+      labels:
+        component: kibana
+    spec:
+      containers:
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana-oss:7.1.1
+          env:
+            - name: ELASTICSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kibana-secrets
+                  key: es_username
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kibana-secrets
+                  key: es_password
+          resources:
+            limits:
+              cpu: 2000m
+            requests:
+              cpu: 2000m
+          ports:
+            - containerPort: 5601
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: http
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /usr/share/kibana/config
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: kibana-config

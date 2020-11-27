@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: ingress-nginx-backend
     app.kubernetes.io/part-of: ingress-nginx
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app.kubernetes.io/name: ingress-nginx-backend
     app.kubernetes.io/part-of: ingress-nginx
@@ -41,6 +41,9 @@ spec:
       containers:
         - name: nginx-ingress-default-backend
           image: opensourceway/default_backend:0.0.1
+          env:
+            - name: NODE_ENV
+              value: production
           ports:
             - name: http
               containerPort: 8080

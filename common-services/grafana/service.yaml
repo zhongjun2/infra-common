@@ -6,14 +6,12 @@ metadata:
     name: grafana
   name: grafana
 spec:
-  externalTrafficPolicy: Cluster
   ports:
   - name: http
-    nodePort: 31919
     port: 80
     protocol: TCP
     targetPort: 3000
   selector:
     app: grafana
   sessionAffinity: None
-  type: LoadBalancer
+  type: NodePort

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-config
+data:
+  kibana.yml: |
+    ---
+    server.name: kibana.osinfra.cn
+    server.host: "0"
+    elasticsearch.ssl.verificationMode: none
+    elasticsearch.hosts: ["https://log.osinfra.cn:9200"]
+    elasticsearch.username:
+    elasticsearch.password:

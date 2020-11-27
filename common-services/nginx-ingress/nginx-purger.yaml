@@ -1,0 +1,112 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginx-purger-serviceaccount
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: nginx-purger-clusterrole
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+    verbs:
+      - list
+      - get
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: nginx-purger-clusterrole-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nginx-purger-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: nginx-purger-serviceaccount
+    namespace: ingress-nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-purger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx-purger
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ingress-nginx-purger
+    spec:
+      serviceAccountName: nginx-purger-serviceaccount
+      containers:
+        - name: nginx-ingress-purger
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/nginx-purger:9cf83c59d48420f5f2182919d7eaae013f7156e5
+          env:
+            - name: BASIC_AUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-purger-secrets
+                  key: username
+            - name: BASIC_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-purger-secrets
+                  key: password
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx-purger
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: ingress-nginx-purger
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+---
+apiVersion: secrets-manager.tuenti.io/v1alpha1
+kind: SecretDefinition
+metadata:
+  name: nginx-purger-secrets
+spec:
+  name: nginx-purger-secrets
+  keysMap:
+    username:
+      path: secrets/data/infra-common/nginx-purger
+      key: username
+    password:
+      path: secrets/data/infra-common/nginx-purger
+      key: password

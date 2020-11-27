@@ -22,12 +22,23 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p /opt/app/conf/pdfs/org_signature_pdf
+              mkdir -p /opt/app/conf/pdfs/output
+              /opt/app/cla-server
           env:
             - name: MONGODB_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: cla-secrets
                   key: mongodb-connection
+            - name: CLA_PLATFORM_URL
+              value: "https://clasign.osinfra.cn/"
+            - name: MONGODB_NAME
+              value: "cla"
             - name: API_TOKEN_KEY
               valueFrom:
                 secretKeyRef:

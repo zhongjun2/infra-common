@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ClusterAnalysisTemplate
+metadata:
+  name: endpoint-reachable
+spec:
+  args:
+    - name: service-fqdn
+    - name: status-code
+  metrics:
+    - name: endpoint-reachable
+      provider:
+        job:
+          spec:
+            backoffLimit: 1
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: curl-service-endpoint
+                    image: curlimages/curl:7.73.0
+                    command:
+                      - /bin/sh
+                      - -c
+                      - |
+                        curl -I {{args.service-fqdn}}
+                        status_code=$(curl --write-out "%{http_code}\n" --silent --output /dev/null "{{args.service-fqdn}}");
+                        [ $status_code -eq {{args.status-code}} ]

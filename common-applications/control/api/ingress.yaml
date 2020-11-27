@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: api-ingress
+spec:
+  tls:
+    - hosts:
+        - api.osinfra.cn
+      secretName: api-cert-secrets
+  rules:
+    - host: api.osinfra.cn
+      http:
+        paths:
+          - backend:
+              serviceName: mailman-service
+              servicePort: 8001
+            path: /mailman(/|$)(.*)
