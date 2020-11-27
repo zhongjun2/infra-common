@@ -28,7 +28,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: nginx-purger-serviceaccount
-    namespace: default
+    namespace: ingress-nginx
 ---
 apiVersion: apps/v1
 kind: Deployment
