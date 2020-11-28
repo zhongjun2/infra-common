@@ -28,6 +28,6 @@ spec:
             - "-u"
             - "$USERNAME:$PASSWORD"
             - "--fail"
-            - "https://api.osinfra.org/nginx-purger/purge?hostname=eye.osinfra.cn"
+            - "https://api.osinfra.cn/nginx-purger/purge?hostname=eye.osinfra.cn"
       restartPolicy: Never
   backoffLimit: 2
