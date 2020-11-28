@@ -24,10 +24,10 @@ spec:
                   key: password
                   name: purge-secrets
           command:
-            - "curl"
-            - "-u"
-            - "$USERNAME:$PASSWORD"
-            - "--fail"
-            - "https://api.osinfra.cn/nginx-purger/purge?hostname=eye.osinfra.cn"
+            - curl
+            - -u
+            - $(USERNAME):$(PASSWORD)
+            - --fail
+            - https://api.osinfra.cn/nginx-purger/purge?hostname=eye.osinfra.cn
       restartPolicy: Never
   backoffLimit: 2
