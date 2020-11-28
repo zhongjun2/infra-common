@@ -16,13 +16,13 @@ spec:
             - name: USERNAME
               valueFrom:
                 secretKeyRef:
-                  key: purge-secrets
-                  name: username
+                  key: username
+                  name: purge-secrets
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: purge-secrets
-                  name: password
+                  key: password
+                  name: purge-secrets
           command:
             - "curl"
             - "-u $USERNAME:$PASSWORD --fail https://api.osinfra.org/nginx-purger/purge?hostname=eye.osinfra.cn"
