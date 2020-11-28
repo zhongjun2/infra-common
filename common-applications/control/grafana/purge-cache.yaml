@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: website-nginx-purge
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  ttlSecondsAfterFinished: 600
+  template:
+    spec:
+      containers:
+        - name: purge_trigger
+          image: curlimages/curl
+          command:
+            - "curl"
+            - "hellp world"
+      restartPolicy: Never
+  backoffLimit: 2
