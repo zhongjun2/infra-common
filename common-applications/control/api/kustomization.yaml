@@ -3,6 +3,7 @@ resources:
   - mailman.yaml
   - namespace.yaml
   - secrets.yaml
+  - nginx-purger.yaml
 commonLabels:
   app: osinfra-api
 namespace: osinfra-api

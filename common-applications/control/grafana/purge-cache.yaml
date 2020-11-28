@@ -12,8 +12,19 @@ spec:
       containers:
         - name: purge-trigger
           image: curlimages/curl
+          env:
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: purge-secrets
+                  name: username
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: purge-secrets
+                  name: password
           command:
-            - "echo"
-            - "hellp world"
+            - "curl"
+            - "-u $USERNAME:$PASSWORD --fail https://api.osinfra.org/nginx-purger/purge\?hostname\=eye.osinfra.cn"
       restartPolicy: Never
   backoffLimit: 2
