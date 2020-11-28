@@ -25,6 +25,6 @@ spec:
                   name: password
           command:
             - "curl"
-            - "-u $USERNAME:$PASSWORD --fail https://api.osinfra.org/nginx-purger/purge\?hostname\=eye.osinfra.cn"
+            - "-u $USERNAME:$PASSWORD --fail https://api.osinfra.org/nginx-purger/purge?hostname=eye.osinfra.cn"
       restartPolicy: Never
   backoffLimit: 2
