@@ -68,7 +68,7 @@ spec:
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - mountPath: /home/jenkins/agent-working-dir
-              name: ubuntu-generic-workspace-pvc
+              name: omdata-jenkins-slave-workspace-pvc
             - mountPath: /home/jenkins/share-config
               name: jenkins-share-config
           command:
