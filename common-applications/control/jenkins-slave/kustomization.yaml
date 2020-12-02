@@ -1,0 +1,4 @@
+resources:
+  - jenkins-slave.yaml
+  - secrets.yaml
+namespace: jenkins
