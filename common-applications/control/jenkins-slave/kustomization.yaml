@@ -1,4 +1,10 @@
 resources:
-  - jenkins-slave.yaml
-  - secrets.yaml
+- jenkins-slave.yaml
+- secrets.yaml
 namespace: jenkins
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.cn-north-4.myhuaweicloud.com/om/om-data
+  newName: swr.cn-north-4.myhuaweicloud.com/om/om-data
+  newTag: 7c2800c5c02f9996d8aacc42c0063050f51f45e0
