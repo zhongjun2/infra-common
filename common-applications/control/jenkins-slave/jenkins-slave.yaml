@@ -54,7 +54,7 @@ spec:
             - name: JENKINS_AGENT_WORKDIR
               value: /home/jenkins/agent-working-dir
             - name: JENKINS_URL
-              value: https://jenkins.osinfra.cn
+              value: http://jenkins.jenkins.svc.cluster.local
             - name: JENKINS_SHARE_FOLDER
               value: /home/jenkins/share-config
             - name: EXECUTOR_NUMBERS
@@ -85,7 +85,7 @@ spec:
             - name: TZ
               value: Asia/Shanghai
             - name: JENKINS_TUNNEL
-              value: jenkins.osinfra.cn:50000
+              value: jenkins.jenkins.svc.cluster.local:50000
             - name: JENKINS_AGENT_NAME
               valueFrom:
                 fieldRef:
@@ -97,7 +97,7 @@ spec:
             - name: JENKINS_AGENT_WORKDIR
               value: /home/jenkins/agent-working-dir
             - name: JENKINS_URL
-              value: https://jenkins.osinfra.cn
+              value: http://jenkins.jenkins.svc.cluster.local
       volumes:
         - name: jenkins-share-config
           emptyDir: {}
