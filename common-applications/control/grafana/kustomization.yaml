@@ -1,6 +1,8 @@
 resources:
   - ../../../common-services/grafana
   - ingress.yaml
+  - purge-cache.yaml
+  - purge-secret.yaml
 commonLabels:
   app: control-grafana
 patchesStrategicMerge:
