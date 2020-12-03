@@ -7,4 +7,4 @@ kind: Kustomization
 images:
 - name: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newName: swr.cn-north-4.myhuaweicloud.com/om/om-data
-  newTag: 7c2800c5c02f9996d8aacc42c0063050f51f45e0
+  newTag: 5967a21ee542ab8d9ca397f9a05058d042a4794c
