@@ -19,6 +19,6 @@ spec:
       name: http
       targetPort: 80
     - port: 30022
-      name: http
+      name: reposerver
       targetPort: 30022
 
