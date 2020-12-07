@@ -9,4 +9,6 @@ resources:
   - collect-data
   - gitee-event
   - gitee-star
+  - report-email
+  - meetings
 namespace: mindspore-om
