@@ -5,3 +5,5 @@ metadata:
   namespace: ingress-nginx
 data:
   30022: "download/repo-service:22"
+  30873: "download/repo-service:873"
+  50000: "jenkins/mindspore-jenkins:50000"
