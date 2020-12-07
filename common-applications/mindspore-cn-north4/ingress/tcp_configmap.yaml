@@ -4,3 +4,4 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
+  30022: "download/repo-service:22"
