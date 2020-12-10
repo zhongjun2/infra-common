@@ -60,7 +60,7 @@ spec:
                   key: postgres_password
             - name: HYPERKITTY_URL
             # NOTE: Please update the HYPERKITTY_URL
-              value: http://mailman-web-service.mail.svc.cluster.local:8000/hyperkitty
+              value: http://mailman-web-service.mail.svc.cluster.local/hyperkitty
             - name: SMTP_HOST
               value: mailman-exim4-service.mail.svc.cluster.local
             - name: EMAIL_HOST_USER
