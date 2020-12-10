@@ -21,9 +21,9 @@ spec:
     - port: 30022
       name: toolsserver
       targetPort: 30022
-    - port: 38081
-      name: tools-http-server
-      targetPort: 38081
+    - port: 31873
+      name: tools-rsync-server
+      targetPort: 30873
     - port: 30873
       name: download-repo-server
       targetPort: 30873
