@@ -12,4 +12,6 @@ resources:
   - gitee-incubator
   - gitee-competition
   - gitee-event
+  - report-email
+  - meetings
 namespace: openeuler-om
