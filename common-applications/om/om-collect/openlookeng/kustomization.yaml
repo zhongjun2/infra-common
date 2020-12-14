@@ -9,4 +9,6 @@ resources:
   - gitee-star
   - collect-data
   - gitee-event
+  - report-email
+  - meetings
 namespace: openlookeng-om

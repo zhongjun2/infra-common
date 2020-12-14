@@ -4,4 +4,7 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
-  30022: "download/repo-service:22"
+  30022: "repo-thirdparty/mindspore-service:22"
+  31873: "repo-thirdparty/mindspore-service:873"
+  30873: "download/repo-service:873"
+  50000: "jenkins-master/mindspore-jenkins:50000"
