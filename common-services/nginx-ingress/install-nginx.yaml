@@ -240,7 +240,7 @@ spec:
       serviceAccountName: nginx-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
+          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
@@ -298,6 +298,14 @@ spec:
               exec:
                 command:
                   - /wait-shutdown
+          volumeMounts:
+            - mountPath: /tmp/statics_cache
+              name: nginx-proxy-cache
+      volumes:
+        - name: nginx-proxy-cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: "500Mi"
 
 ---
 
