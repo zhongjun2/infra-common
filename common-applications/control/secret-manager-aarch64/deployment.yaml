@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: secret-sync-manager
+  namespace: secrets-manager
+spec:
+  template:
+    spec:
+      containers:
+        - name: secrets-manager
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/secrets-manager-arm:v1.0.3
+          args:
+            - -vault.url=https://secret.osinfra.cn
+            - -enable-debug-log
