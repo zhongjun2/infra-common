@@ -18,3 +18,7 @@ data:
   add-headers: "ingress-nginx/custom-headers"
   http-snippet: |
     proxy_cache_path /tmp/statics_cache levels=1:2 keys_zone=statics_cache:50m use_temp_path=off max_size=500m inactive=1h;
+    map $http_x_requested_with $nocache {
+        default 0;
+        XMLHttpRequest 1;
+    }
