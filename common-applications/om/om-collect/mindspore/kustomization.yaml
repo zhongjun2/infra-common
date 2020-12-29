@@ -2,6 +2,7 @@ resources:
   - git
   - github
   - website
+  - website-ascend
   - gitee
   - download
   - maillist
