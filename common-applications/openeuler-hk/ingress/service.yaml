@@ -10,5 +10,10 @@ metadata:
 spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
-  
-  
+  ports:
+    - port: 30081
+      name: mindspore-frontend
+      targetPort: 30081
+    - port: 30082
+      name: mindspore-backend
+      targetPort: 30082
