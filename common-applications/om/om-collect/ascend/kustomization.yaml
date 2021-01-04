@@ -1,0 +1,4 @@
+resources:
+  - gitee
+  - gitee-star
+namespace: ascend-om
