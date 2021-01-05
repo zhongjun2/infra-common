@@ -1,4 +1,5 @@
 resources:
   - gitee
   - gitee-star
+  - git
 namespace: ascend-om
