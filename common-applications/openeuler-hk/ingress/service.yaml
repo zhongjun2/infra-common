@@ -10,5 +10,3 @@ metadata:
 spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
-  
-  
