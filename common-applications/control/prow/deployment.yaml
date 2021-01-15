@@ -6,7 +6,7 @@ metadata:
   labels:
     app: deck
   name: deck
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 2
   selector:
@@ -85,7 +85,7 @@ metadata:
   labels:
     app: gitee-deck
   name: gitee-deck
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   selector:
@@ -164,7 +164,7 @@ metadata:
   labels:
     app: gitee-hook
   name: gitee-hook
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 2
   selector:
@@ -246,7 +246,7 @@ metadata:
   labels:
     app: gitee-tide
   name: gitee-tide
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   selector:
@@ -305,7 +305,7 @@ metadata:
   labels:
     app: hook
   name: hook
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 2
   selector:
@@ -431,7 +431,7 @@ metadata:
   labels:
     app: horologium
   name: horologium
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   strategy:
@@ -464,7 +464,7 @@ metadata:
   labels:
     app: jenkins-operator
   name: jenkins-operator
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   selector:
@@ -566,7 +566,7 @@ metadata:
   labels:
     app: job-reporter
   name: job-reporter
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   selector:
@@ -618,7 +618,7 @@ metadata:
   labels:
     app: plank
   name: plank
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   selector:
@@ -662,7 +662,7 @@ metadata:
   labels:
     app: sinker
   name: sinker
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   template:
@@ -692,7 +692,7 @@ metadata:
   labels:
     app: statusreconciler
   name: statusreconciler
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   template:
@@ -739,7 +739,7 @@ metadata:
   labels:
     app: tide
   name: tide
-  namespace: prow
+  namespace: prow-prod
 spec:
   replicas: 1
   strategy:

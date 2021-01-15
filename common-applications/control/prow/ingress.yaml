@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
   generation: 4
   name: prow-ingress
-  namespace: prow
+  namespace: prow-prod
   resourceVersion: '25430115'
   selfLink: "/apis/extensions/v1beta1/namespaces/prow/ingresses/prow-ingress"
   uid: 635eb6db-777b-4241-b683-83b218d0a23f
@@ -47,7 +47,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
   name: prow-ingress-gitee-deck
-  namespace: prow
+  namespace: prow-prod
 spec:
   rules:
   - host: prow.osinfra.cn
