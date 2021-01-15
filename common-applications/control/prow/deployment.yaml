@@ -1,0 +1,776 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: deck
+  name: deck
+  namespace: prow-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deck
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: deck
+    spec:
+      containers:
+      - args:
+        - "--config-path=/etc/config/config.yaml"
+        - "--plugin-config=/etc/plugins/plugins.yaml"
+        - "--tide-url=http://tide/"
+        - "--hook-url=http://hook:8888/plugin-help"
+        - "--github-token-path=/etc/github/oauth"
+        - "--s3-credentials-file=/etc/s3/s3-credentials.json"
+        - "--spyglass=true"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/deck:v0.0.1
+        livenessProbe:
+          httpGet:
+            path: "/healthz"
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        name: deck
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          httpGet:
+            path: "/healthz/ready"
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
+        volumeMounts:
+        - mountPath: "/etc/s3"
+          name: s3
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+      serviceAccountName: deck
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: s3
+        secret:
+          secretName: s3-credentials
+      - configMap:
+          name: common-config
+        name: config
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - configMap:
+          name: github-plugins
+        name: plugins
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: gitee-deck
+  name: gitee-deck
+  namespace: prow-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitee-deck
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gitee-deck
+    spec:
+      containers:
+      - args:
+        - "--config-path=/etc/config/config.yaml"
+        - "--plugin-config=/etc/plugins/plugins.yaml"
+        - "--tide-url=http://tide/"
+        - "--hook-url=http://gitee-hook:8888/gitee-plugin-help"
+        - "--github-token-path=/etc/github/oauth"
+        - "--s3-credentials-file=/etc/s3/s3-credentials.json"
+        - "--spyglass=true"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/deck:v0.0.1
+        livenessProbe:
+          httpGet:
+            path: "/healthz"
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        name: gitee-deck
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          httpGet:
+            path: "/healthz/ready"
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
+        volumeMounts:
+        - mountPath: "/etc/s3"
+          name: s3
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+      serviceAccountName: deck
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: s3
+        secret:
+          secretName: s3-credentials
+      - configMap:
+          name: common-config
+        name: config
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - configMap:
+          name: github-plugins
+        name: plugins
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: gitee-hook
+  name: gitee-hook
+  namespace: prow-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gitee-hook
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gitee-hook
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--job-config-path=/etc/jobs/config.yaml"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/gitee-hook:v0.0.1
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: "/healthz"
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        name: gitee-hook
+        ports:
+        - containerPort: 8888
+          name: http
+        readinessProbe:
+          httpGet:
+            path: "/healthz/ready"
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
+        volumeMounts:
+        - mountPath: "/etc/webhook"
+          name: hmac
+          readOnly: true
+        - mountPath: "/etc/gitee"
+          name: gitee
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+        - mountPath: "/etc/jobs"
+          name: job
+          readOnly: true
+      serviceAccountName: gitee-hook
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: hmac
+        secret:
+          secretName: hmac-token
+      - name: gitee
+        secret:
+          secretName: gitee-token
+      - configMap:
+          name: common-config
+        name: config
+      - configMap:
+          name: gitee-plugins
+        name: plugins
+      - configMap:
+          name: gitee-jobs
+        name: job
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: gitee-tide
+  name: gitee-tide
+  namespace: prow-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitee-tide
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: gitee-tide
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--job-config-path=/etc/job/config.yaml"
+        - "--s3-credentials-file=/etc/s3/s3-credentials.json"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/gitee-tide:v0.0.1
+        name: gitee-tide
+        ports:
+        - containerPort: 8888
+          name: http
+        volumeMounts:
+        - mountPath: "/etc/s3"
+          name: s3
+          readOnly: true
+        - mountPath: "/etc/gitee"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/job"
+          name: job
+          readOnly: true
+      serviceAccountName: gitee-tide
+      volumes:
+      - name: oauth
+        secret:
+          secretName: gitee-token
+      - configMap:
+          name: gitee-tide
+        name: config
+      - configMap:
+          name: gitee-jobs
+        name: job
+      - name: s3
+        secret:
+          secretName: s3-credentials
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: hook
+  name: hook
+  namespace: prow-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hook
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: hook
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--job-config-path=/etc/jobs/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/hook:v0.0.1
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: "/healthz"
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        name: hook
+        ports:
+        - containerPort: 8888
+          name: http
+        readinessProbe:
+          httpGet:
+            path: "/healthz/ready"
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
+        volumeMounts:
+        - mountPath: "/etc/webhook"
+          name: hmac
+          readOnly: true
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+        - mountPath: "/etc/jobs"
+          name: job
+          readOnly: true
+      - args:
+        - "--dry-run=false"
+        - "--port=9999"
+        - "--github-token-path=/etc/github/oauth"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sync-pr:v0.0.1
+        imagePullPolicy: Always
+        name: sync-pr
+        ports:
+        - containerPort: 9999
+          name: http
+        volumeMounts:
+        - mountPath: "/etc/webhook"
+          name: hmac
+          readOnly: true
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/gitee"
+          name: gitee
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+      - args:
+        - "--dry-run=false"
+        - "--port=10000"
+        - "--github-token-path=/etc/github/oauth"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/close-pr:v0.0.1
+        imagePullPolicy: Always
+        name: close-pr
+        ports:
+        - containerPort: 10000
+          name: http
+        volumeMounts:
+        - mountPath: "/etc/webhook"
+          name: hmac
+          readOnly: true
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+      serviceAccountName: hook
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: hmac
+        secret:
+          secretName: hmac-token
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - name: gitee
+        secret:
+          secretName: gitee-token
+      - configMap:
+          name: common-config
+        name: config
+      - configMap:
+          name: github-plugins
+        name: plugins
+      - configMap:
+          name: github-jobs
+        name: job
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: horologium
+  name: horologium
+  namespace: prow-prod
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: horologium
+    spec:
+      containers:
+      - args:
+        - "--config-path=/etc/config/config.yaml"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/horologium:v0.0.1
+        name: horologium
+        volumeMounts:
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: horologium
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          name: common-config
+        name: config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: jenkins-operator
+  name: jenkins-operator
+  namespace: prow-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jenkins-operator
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        - "--skip-report=true"
+        - "--jenkins-url=https://build.openlookeng.io"
+        - "--jenkins-user=admin"
+        - "--jenkins-token-file=/etc/jenkins/token"
+        - "--label-selector=master=openlookeng"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/jenkins-operator:v0.0.1
+        name: jenkins-operator-openlookeng
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/jenkins"
+          name: jenkins
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        - "--skip-report=true"
+        - "--jenkins-url=https://ci.ascend.huawei.com"
+        - "--jenkins-user=admin"
+        - "--jenkins-token-file=/etc/jenkins/token"
+        - "--label-selector=master=ascend"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/jenkins-operator:v0.0.1
+        name: jenkins-operator-ascend
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/jenkins"
+          name: ascend-jenkins
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        - "--skip-report=true"
+        - "--jenkins-url=https://jenkins.osinfra.cn"
+        - "--jenkins-user=admin"
+        - "--jenkins-token-file=/etc/jenkins/token"
+        - "--label-selector=master=public"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/jenkins-operator:v0.0.1
+        name: jenkins-operator-public
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/jenkins"
+          name: public-jenkins
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: jenkins-operator
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - name: jenkins
+        secret:
+          secretName: jenkins-token
+      - name: ascend-jenkins
+        secret:
+          secretName: ascend-jenkins-token
+      - name: public-jenkins
+        secret:
+          secretName: public-jenkins-token
+      - configMap:
+          name: common-config
+        name: config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: job-reporter
+  name: job-reporter
+  namespace: prow-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: job-reporter
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: job-reporter
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        - "--gitee-token-path=/etc/gitee/oauth"
+        - "--github-workers=1"
+        - "--gitee-workers=1"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/job-reporter:v0.0.1
+        name: job-reporter
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/gitee"
+          name: gitee
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: job-reporter
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - name: gitee
+        secret:
+          secretName: gitee-token
+      - configMap:
+          name: common-config
+        name: config
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: plank
+  name: plank
+  namespace: prow-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plank
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: plank
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        - "--skip-report=true"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/plank:v0.0.1
+        name: plank
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: plank
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - configMap:
+          name: common-config
+        name: config
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: sinker
+  name: sinker
+  namespace: prow-prod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sinker
+    spec:
+      containers:
+      - args:
+        - "--config-path=/etc/config/config.yaml"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sinker:v0.0.1
+        name: sinker
+        volumeMounts:
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: sinker
+      volumes:
+      - configMap:
+          name: common-config
+        name: config
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: statusreconciler
+  name: statusreconciler
+  namespace: prow-prod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: statusreconciler
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--continue-on-error=true"
+        - "--plugin-config=/etc/plugins/plugins.yaml"
+        - "--config-path=/etc/config/config.yaml"
+        - "--github-token-path=/etc/github/oauth"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/status-reconciler:v0.0.1
+        name: statusreconciler
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+        - mountPath: "/etc/plugins"
+          name: plugins
+          readOnly: true
+      serviceAccountName: statusreconciler
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - configMap:
+          name: common-config
+        name: config
+      - configMap:
+          name: github-plugins
+        name: plugins
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: tide
+  name: tide
+  namespace: prow-prod
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tide
+    spec:
+      containers:
+      - args:
+        - "--dry-run=false"
+        - "--config-path=/etc/config/config.yaml"
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/tide:v0.0.1
+        name: tide
+        ports:
+        - containerPort: 8888
+          name: http
+        volumeMounts:
+        - mountPath: "/etc/github"
+          name: oauth
+          readOnly: true
+        - mountPath: "/etc/config"
+          name: config
+          readOnly: true
+      serviceAccountName: tide
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - configMap:
+          name: common-config
+        name: config
+
