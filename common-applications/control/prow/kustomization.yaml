@@ -1,8 +1,11 @@
 resources:
-  - ingress.yaml
+#  - ingress.yaml
   - deployment.yaml
   - namespace.yaml
   - service.yaml
   - secrets.yaml
+  - roles.yaml
+  - configmap.yaml
+  - crds.yaml
 commonLabels:
   service: common-prow
