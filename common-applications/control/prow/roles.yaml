@@ -1,0 +1,423 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: deck
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - get
+  - list
+  - watch
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "deck"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "deck"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "deck"
+subjects:
+  - kind: ServiceAccount
+    name: "deck"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: gitee-hook
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+  - update
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "gitee-hook"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "gitee-hook"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "gitee-hook"
+subjects:
+  - kind: ServiceAccount
+    name: "gitee-hook"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: gitee-tide
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+  - list
+  - get
+  - watch
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "gitee-tide"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "gitee-tide"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "gitee-tide"
+subjects:
+  - kind: ServiceAccount
+    name: "gitee-tide"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: hook
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+  - update
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: prow-prod
+  name: "hook"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "hook"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "hook"
+subjects:
+  - kind: ServiceAccount
+    name: "hook"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: horologium
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+  - list
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "horologium"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "horologium"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "horologium"
+subjects:
+  - kind: ServiceAccount
+    name: "horologium"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: jenkins-operator
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - get
+  - create
+  - list
+  - update
+  - patch
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "jenkins-operator"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "jenkins-operator"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "jenkins-operator"
+subjects:
+  - kind: ServiceAccount
+    name: "jenkins-operator"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: job-reporter
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - get
+  - create
+  - list
+  - update
+  - patch
+  - watch
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "job-reporter"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "job-reporter"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "job-reporter"
+subjects:
+  - kind: ServiceAccount
+    name: "job-reporter"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: plank
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - get
+  - create
+  - list
+  - update
+  - patch
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "plank"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "plank"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "plank"
+subjects:
+  - kind: ServiceAccount
+    name: "plank"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: sinker
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - delete
+  - list
+  - watch
+  - get
+- apiGroups:
+  - ""
+  resourceNames:
+  - prow-sinker-leaderlock
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - events
+  verbs:
+  - create
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: prow-prod
+  name: "sinker"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "sinker"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "sinker"
+subjects:
+  - kind: ServiceAccount
+    name: "sinker"
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: statusreconciler
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: prow-prod
+  name: "statusreconciler"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "statusreconciler"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "statusreconciler"
+subjects:
+  - kind: ServiceAccount
+    name: "statusreconciler"
+---
+piVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+  name: tide
+  namespace: prow-prod
+rules:
+- apiGroups:
+  - prow.k8s.io
+  resources:
+  - prowjobs
+  verbs:
+  - create
+  - list
+  - get
+  - watch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: prow-prod
+  name: "tide"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: prow-prod
+  name: "tide"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "tide"
+subjects:
+  - kind: ServiceAccount
+    name: "tide"

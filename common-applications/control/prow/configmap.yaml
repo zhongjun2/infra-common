@@ -1,0 +1,476 @@
+---
+apiVersion: v1
+data:
+  config.yaml: |
+    prowjob_namespace: prow-prod
+    pod_namespace: prow-prod
+    plank:
+      job_url_template: '{{if .Spec.Refs}}{{if eq .Spec.Refs.Org "kubernetes-security"}}http://console.cloud.google.com/storage/browser/kubernetes-security-prow/{{else}}http://dev-prow.mindspore.cn/view/gcs/prow-artifacts/{{end}}{{else}}http://dev-prow.mindspore.cn/view/gcs/prow-artifacts/{{end}}{{if eq .Spec.Type "presubmit"}}pr-logs/pull{{else if eq .Spec.Type "batch"}}pr-logs/pull{{else}}logs{{end}}{{if eq .Spec.Type "presubmit"}}{{if .Spec.Refs}}{{if eq .Spec.Refs.Org "kubernetes"}}{{if ne .Spec.Refs.Repo "kubernetes"}}/{{.Spec.Refs.Repo}}{{end}}{{else}}/{{.Spec.Refs.Org}}_{{.Spec.Refs.Repo}}{{end}}{{end}}/{{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}{{else if eq .Spec.Type "batch"}}/batch{{end}}/{{.Spec.Job}}/{{.Status.BuildID}}/'
+      job_url_prefix_config:
+        '*': https://prow.osinfra.cn/view/s3/
+      pod_pending_timeout: 15m
+      pod_unscheduled_timeout: 1m
+      default_decoration_configs:
+        '*':
+          utility_images: # using the tag we identified above
+            clonerefs: "zengchen1024/clonerefs:v20200228-31c76new2"
+            initupload: "zengchen1024/initupload:v20200228-31c76new2"
+            sidecar: "zengchen1024/sidecar:v20200228-31c76new2"
+            entrypoint: "gcr.io/k8s-prow/entrypoint:v20200406-5c0e225cf"
+          gcs_configuration:
+            bucket: s3://prow-artifacts # the bucket we just made
+            path_strategy: explicit
+          s3_credentials_secret: s3-credentials
+
+    github_reporter:
+      job_types_to_report:
+      - presubmit
+      - postsubmit
+
+    sinker:
+      resync_period: 1m
+      max_prowjob_age: 48h
+      max_pod_age: 48h
+      terminated_pod_ttl: 30m
+
+    deck:
+      spyglass:
+        size_limit: 500000000 # 500MB
+        gcs_browser_prefix: https://storage.huaweicloud.com/obs/
+        testgrid_config: gs://k8s-testgrid/config
+        testgrid_root: http://testgrid.k8s.io/
+        lenses:
+        - lens:
+            name: metadata
+          required_files:
+          - started.json|finished.json
+          optional_files:
+          - podinfo.json
+        - lens:
+            name: buildlog
+          required_files:
+            - build-log.txt
+        - lens:
+            name: junit
+          required_files:
+            - artifacts/junit.*\.xml
+        - lens:
+            name: coverage
+          required_files:
+            - artifacts/filtered.cov
+          optional_files:
+            - artifacts/filtered.html
+        - lens:
+            name: podinfo
+          required_files:
+            - podinfo.json
+
+    status_error_link: https://github.com/opensourceways/test-infra/issues
+
+    jenkins_operators:
+    - job_url_template: '{{if .Spec}}{{if .Status}}https://build.openlookeng.io/job/{{.Spec.Job}}/{{.Status.JenkinsBuildID}}/console{{end}}{{end}}'
+      label_selector: master=openlookeng
+      max_concurrency: 100
+    - job_url_template: '{{if .Spec}}{{if .Status}}https://ci.ascend.huawei.com/job/{{.Spec.Job}}/{{.Status.JenkinsBuildID}}/console{{end}}{{end}}'
+      label_selector: master=ascend
+      max_concurrency: 100
+    - job_url_template: '{{if .Spec}}{{if .Status}}https://jenkins.osinfra.cn/job/{{.Spec.Job}}/{{.Status.JenkinsBuildID}}/console{{end}}{{end}}'
+      label_selector: master=public
+      max_concurrency: 100
+kind: ConfigMap
+metadata:
+  annotations: {}
+  name: common-config
+  namespace: prow-prod
+---
+apiVersion: v1
+data:
+  config.yaml: |
+    presubmits:
+      openlookeng/openlookeng-ranger-plugin:
+      - name: openlookeng_ranger_plugin_project
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/hetu-core:
+      - name: hetu-core-build-test-job1
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job2
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job3
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job4
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job5
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job6
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      - name: hetu-core-build-test-job7
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/hetu-maven-plugin:
+      - name: hetu-maven-plugin
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/hetu-odbc-driver:
+      - name: hetu_odbc_driver_pr_project
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/hetu-odbc-gateway:
+      - name: hetu_odbc_gateway_pr_project
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/website:
+      - name: website-ci
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+
+      openlookeng/community:
+      - name: check_format_of_data.yaml
+        agent: jenkins
+        always_run: true
+        labels:
+          master: public
+
+      zengchen1024/repo-test:
+      - name: test_job
+        agent: jenkins
+        always_run: true
+        labels:
+          master: openlookeng
+kind: ConfigMap
+metadata:
+  annotations: {}
+  name: gitee-jobs
+  namespace: prow-prod
+---
+apiVersion: v1
+data:
+  plugins.yaml: |
+    owners:
+      skip_collaborators:
+      - openlookeng/openlookeng-ranger-plugin
+      - openlookeng/hetu-core
+      - openlookeng/hetu-maven-plugin
+      - openlookeng/hetu-odbc-driver
+      - openlookeng/hetu-odbc-gateway
+      - openlookeng/website
+      - openlookeng/community
+      - ascend
+
+    lgtm:
+    - repos:
+      - openlookeng/openlookeng-ranger-plugin
+      - openlookeng/hetu-core
+      - openlookeng/hetu-maven-plugin
+      - openlookeng/hetu-odbc-driver
+      - openlookeng/hetu-odbc-gateway
+      - openlookeng/website
+      - openlookeng/community
+      - ascend
+      strict_review: true
+
+    triggers:
+    - repos:
+      - openlookeng
+      join_org_url: https://gitee.com/organizations/openlookeng/members/list
+      org_member_url: https://gitee.com/organizations/openlookeng/members/list
+    - repos:
+      - ascend
+      join_org_url: https://gitee.com/organizations/ascend/members/list
+      org_member_url: https://gitee.com/organizations/ascend/members/list
+
+    slack:
+      robot_channel: https://hooks.slack.com/services/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
+      dev_channel: https://hooks.slack.com/services/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
+
+    cla:
+    - repos:
+      - ascend
+      cla_label_yes: ascend-cla/yes
+      cla_label_no: ascend-cla/no
+      check_url: https://clasign.osinfra.cn/api/v1/individual-signing/gitee/ascend
+      sign_url: https://clasign.osinfra.cn/sign/Z2l0ZWUlMkZhc2NlbmQ=
+    - repos:
+      - openeuler
+      - src-openeuler
+      - openeuler-competition
+      - openeuler2020
+      cla_label_yes: openeuler-cla/yes
+      cla_label_no: openeuler-cla/no
+      check_url: https://clasign.osinfra.cn/api/v1/individual-signing/gitee/openeuler
+      sign_url: https://clasign.osinfra.cn/sign/Z2l0ZWUlMkZvcGVuZXVsZXI=
+    - repos:
+      - ci-bot
+      cla_label_yes: ci-bot-cla/yes
+      cla_label_no: ci-bot-cla/no
+      check_url: https://clasign.osinfra.cn/api/v1/individual-signing/gitee/ci-bot
+      sign_url: https://clasign.osinfra.cn/sign/Z2l0ZWUlMkZjaS1ib3Q=
+
+    plugins:
+      openlookeng/openlookeng-ranger-plugin:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/hetu-core:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/hetu-odbc-driver:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/hetu-odbc-gateway:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/hetu-maven-plugin:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/website:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      openlookeng/community:
+      - lgtm
+      - approve
+      - assign
+      - trigger
+      - slack
+
+      ascend:
+      - cla
+      - lgtm
+      - approve
+      - assign
+
+      openeuler:
+      - cla
+
+      src-openeuler:
+      - cla
+
+      openeuler-competition:
+      - cla
+
+      openeuler2020:
+      - cla
+
+      ci-bot:
+      - cla
+
+      zengchen1024/repo-test:
+      - trigger
+kind: ConfigMap
+metadata:
+  annotations: {}
+  name: gitee-plugins
+  namespace: prow-prod
+---
+apiVersion: v1
+data:
+  config.yaml: |
+    prowjob_namespace: prow-prod
+    pod_namespace: prow-prod
+
+    plank:
+      job_url_template: '{{if .Spec.Refs}}{{if eq .Spec.Refs.Org "kubernetes-security"}}http://console.cloud.google.com/storage/browser/kubernetes-security-prow/{{else}}http://dev-prow.mindspore.cn/view/gcs/prow-artifacts/{{end}}{{else}}http://dev-prow.mindspore.cn/view/gcs/prow-artifacts/{{end}}{{if eq .Spec.Type "presubmit"}}pr-logs/pull{{else if eq .Spec.Type "batch"}}pr-logs/pull{{else}}logs{{end}}{{if eq .Spec.Type "presubmit"}}{{if .Spec.Refs}}{{if eq .Spec.Refs.Org "kubernetes"}}{{if ne .Spec.Refs.Repo "kubernetes"}}/{{.Spec.Refs.Repo}}{{end}}{{else}}/{{.Spec.Refs.Org}}_{{.Spec.Refs.Repo}}{{end}}{{end}}/{{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}{{else if eq .Spec.Type "batch"}}/batch{{end}}/{{.Spec.Job}}/{{.Status.BuildID}}/'
+      job_url_prefix_config:
+        '*': https://prow.osinfra.cn/view/s3/
+      pod_pending_timeout: 15m
+      pod_unscheduled_timeout: 1m
+      default_decoration_configs:
+        '*':
+          utility_images: # using the tag we identified above
+            clonerefs: "zengchen1024/clonerefs:v20200228-31c76new2"
+            initupload: "zengchen1024/initupload:v20200228-31c76new2"
+            sidecar: "zengchen1024/sidecar:v20200228-31c76new2"
+            entrypoint: "gcr.io/k8s-prow/entrypoint:v20200406-5c0e225cf"
+          gcs_configuration:
+            bucket: s3://prow-artifacts # the bucket we just made
+            path_strategy: explicit
+          s3_credentials_secret: s3-credentials
+
+    tide:
+      sync_period: 2m
+      merge_method:
+        ascend/canndev: squash
+      queries:
+      - repos:
+        - openlookeng/openlookeng-ranger-plugin
+        - openlookeng/website
+        - openlookeng/hetu-core
+        - openlookeng/hetu-maven-plugin
+        - openlookeng/hetu-odbc-driver
+        - openlookeng/hetu-odbc-gateway
+        - openlookeng/openLooKeng-installation
+        - openlookeng/community
+        labels:
+        - lgtm
+        - approved
+        - openlookeng-cla/yes
+
+      - repos:
+        - ascend/playground
+        - ascend/pyge
+        - ascend/slurm-atlas-plugin
+        - ascend/ascend-docker-image
+        - ascend/ascend-deployer
+        labels:
+        - lgtm
+        - approved
+        - ascend-cla/yes
+
+      - repos:
+        - ascend/cann-benchmark
+        - ascend/ais-bench
+        - ascend/apex
+        - ascend/atlasboost
+        - ascend/cann
+        - ascend/canndev
+        - ascend/ci
+        - ascend/docs
+        - ascend/docs-dev
+        - ascend/metadef
+        - ascend/mindstudio
+        - ascend/mindxdl-deploy
+        - ascend/modelzoo
+        - ascend/parser
+        - ascend/pytorch
+        - ascend/samples
+        - ascend/tensorflow
+        - ascend/testframework
+        - ascend/tools
+        labels:
+        - lgtm
+        - approved
+        - ascend-cla/yes
+        - ci-pipeline-passed
+kind: ConfigMap
+metadata:
+  annotations: {}
+  name: gitee-tide
+  namespace: prow-prod
+---
+apiVersion: v1
+data:
+  config.yaml: 'presubmits:'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  name: github-jobs
+  namespace: prow-prod
+---
+apiVersion: v1
+data:
+  plugins.yaml: "syncpr:\n  github_comment_template: 'This pr has been synchronized
+    to the **[Gitee Repository]({{.HtmlUrl}})**'\n  gitee_comment_template: 'This
+    pr was synchronized from the **[Github Repository]({{.HTMLURL}})**'\n\n  dest_org:\n
+    \   openlookeng: openlookeng\n    opengauss-mirror: opengauss\n  middle_repo:\n
+    \   opengauss-mirror/website: gauss-website\n    opengauss-mirror/infra: gauss-infra\n
+    \   opengauss-mirror/docs: gauss-docs\n    opengauss-mirror/security: gauss-security\n
+    \   opengauss-mirror/tc: gauss-tc\n    opengauss-mirror/blog: gauss-blog\n    opengauss-mirror/community:
+    gauss-community\n\nwelcome:\n- repos:\n    - openlookeng\n  message_template:
+    \"Welcome @{{.AuthorLogin}}! <br><br>It looks like this is your first PR to <a
+    href='https://github.com/{{.Org}}/{{.Repo}}'>{{.Org}}/{{.Repo}}</a> \U0001F389.
+    <br><br>You will be prompted by a bot to use commands during the review process.
+    Do not be afraid to follow the prompts! It is okay to experiment. [Here is the
+    bot commands documentation](https://prow.osinfra.io/command-help). <br><br>You
+    can also check if {{.Org}}/{{.Repo}} has [its own contribution guidelines](https://github.com/{{.Org}}/{{.Repo}}/tree/master/CONTRIBUTING.md).
+    We want to make sure your contribution gets all the attention it needs! <br><br>Thank
+    you, and welcome to MindSpore. :smiley:\"\n\nexternal_plugins:\n  openlookeng:\n
+    \ - name: syncpr\n    endpoint: http://localhost:9999\n    events:\n    - issue_comment\n
+    \ - name: closepr\n    endpoint: http://localhost:10000\n    events:\n    - pull_request\n
+    \ opengauss-mirror:\n  - name: syncpr\n    endpoint: http://localhost:9999\n    events:\n
+    \   - issue_comment\n  - name: closepr\n    endpoint: http://localhost:10000\n
+    \   events:\n    - pull_request\n\nlgtm:\n- repos:\n  - openlookeng\n  store_tree_hash:
+    true\n\nplugins:\n  openlookeng:\n    - welcome\n    - lgtm\n    - approve\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"v1\",\"data\":{\"plugins.yaml\":\"syncpr:\\n
+      \ github_comment_template: 'This pr has been synchronized to the **[Gitee Repository]({{.HtmlUrl}})**'\\n
+      \ gitee_comment_template: 'This pr was synchronized from the **[Github Repository]({{.HTMLURL}})**'\\n\\n
+      \ dest_org:\\n    openlookeng: openlookeng\\n    opengauss-mirror: opengauss\\n
+      \ middle_repo:\\n    opengauss-mirror/website: gauss-website\\n    opengauss-mirror/infra:
+      gauss-infra\\n    opengauss-mirror/docs: gauss-docs\\n    opengauss-mirror/security:
+      gauss-security\\n    opengauss-mirror/tc: gauss-tc\\n    opengauss-mirror/blog:
+      gauss-blog\\n    opengauss-mirror/community: gauss-community\\n\\nwelcome:\\n-
+      repos:\\n    - openlookeng\\n  message_template: \\\"Welcome @{{.AuthorLogin}}!
+      \\u003cbr\\u003e\\u003cbr\\u003eIt looks like this is your first PR to \\u003ca
+      href='https://github.com/{{.Org}}/{{.Repo}}'\\u003e{{.Org}}/{{.Repo}}\\u003c/a\\u003e
+      \U0001F389. \\u003cbr\\u003e\\u003cbr\\u003eYou will be prompted by a bot to
+      use commands during the review process. Do not be afraid to follow the prompts!
+      It is okay to experiment. [Here is the bot commands documentation](https://prow.osinfra.io/command-help).
+      \\u003cbr\\u003e\\u003cbr\\u003eYou can also check if {{.Org}}/{{.Repo}} has
+      [its own contribution guidelines](https://github.com/{{.Org}}/{{.Repo}}/tree/master/CONTRIBUTING.md).
+      We want to make sure your contribution gets all the attention it needs! \\u003cbr\\u003e\\u003cbr\\u003eThank
+      you, and welcome to MindSpore. :smiley:\\\"\\n\\nexternal_plugins:\\n  openlookeng:\\n
+      \ - name: syncpr\\n    endpoint: http://localhost:9999\\n    events:\\n    -
+      issue_comment\\n  - name: closepr\\n    endpoint: http://localhost:10000\\n
+      \   events:\\n    - pull_request\\n  opengauss-mirror:\\n  - name: syncpr\\n
+      \   endpoint: http://localhost:9999\\n    events:\\n    - issue_comment\\n  -
+      name: closepr\\n    endpoint: http://localhost:10000\\n    events:\\n    - pull_request\\n\\nlgtm:\\n-
+      repos:\\n  - openlookeng\\n  store_tree_hash: true\\n\\nplugins:\\n  openlookeng:\\n
+      \   - welcome\\n    - lgtm\\n    - approve\\n\"},\"kind\":\"ConfigMap\",\"metadata\":{\"annotations\":{},\"name\":\"github-plugins\",\"namespace\":\"prow\"}}\n"
+  name: github-plugins
+  namespace: prow-prod

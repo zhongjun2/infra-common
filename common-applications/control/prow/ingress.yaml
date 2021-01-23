@@ -9,9 +9,6 @@ metadata:
   generation: 4
   name: prow-ingress
   namespace: prow-prod
-  resourceVersion: '25430115'
-  selfLink: "/apis/extensions/v1beta1/namespaces/prow/ingresses/prow-ingress"
-  uid: 635eb6db-777b-4241-b683-83b218d0a23f
 spec:
   rules:
   - host: prow.osinfra.cn
