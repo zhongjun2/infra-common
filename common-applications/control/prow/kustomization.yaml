@@ -1,11 +1,16 @@
-resources:
 #  - ingress.yaml
-  - deployment.yaml
-  - namespace.yaml
-  - service.yaml
-  - secrets.yaml
-  - roles.yaml
-  - configmap.yaml
-  - crds.yaml
+resources:
+- deployment.yaml
+- namespace.yaml
+- service.yaml
+- secrets.yaml
+- roles.yaml
+- configmap.yaml
+- crds.yaml
 commonLabels:
   service: common-prow
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/prow/gitee-hook
+  newTag: eed964a2cdb3898de423b35d1460e1e469a213cd
