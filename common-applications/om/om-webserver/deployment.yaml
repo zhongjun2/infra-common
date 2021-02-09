@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: om-webserver
-        image: swr.cn-north-4.myhuaweicloud.com/om/om-webserver:1.0.6
+        image: swr.cn-north-4.myhuaweicloud.com/om/om-webserver:1.0.7
         resources:
           requests:
             memory: 100Mi
@@ -30,6 +30,9 @@ spec:
           name: om-webserver-secrets-volume
         - mountPath: /var/lib/om-webserver/openLookeng.properties
           subPath: openLookeng_properties
+          name: om-webserver-secrets-volume
+        - mountPath: /var/lib/om-webserver/mindSpore.properties
+          subPath: mindSpore_properties
           name: om-webserver-secrets-volume
         - mountPath: /var/lib/om-webserver/application.properties
           subPath: application_properties
