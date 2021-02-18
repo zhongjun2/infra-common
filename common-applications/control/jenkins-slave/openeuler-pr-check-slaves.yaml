@@ -98,6 +98,26 @@ spec:
               value: /home/jenkins/agent-working-dir
             - name: JENKINS_URL
               value: http://jenkins.jenkins.svc.cluster.local
+            - name: ACCOUNT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: osinfra-jenkins
+                  key: account_username
+            - name: REGION
+              valueFrom:
+                secretKeyRef:
+                  name: osinfra-jenkins
+                  key: region
+            - name: IAM_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: osinfra-jenkins
+                  key: iam_username
+            - name: IAM_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: osinfra-jenkins
+                  key: iam_password
       volumes:
         - name: jenkins-share-config
           emptyDir: {}
