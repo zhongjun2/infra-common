@@ -15,4 +15,6 @@ resources:
   - report-email
   - meetings
   - cla
+  - website-repo
+  - website-ru-repo
 namespace: openeuler-om

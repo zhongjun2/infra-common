@@ -1,0 +1,7 @@
+resources:
+  - ../../../common-services/nginx-ingress
+commonLabels:
+  app: openeuler-hk-ingress
+patchesStrategicMerge:
+  - service.yaml
+  - deployment.yaml

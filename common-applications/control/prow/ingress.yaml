@@ -1,0 +1,60 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+  generation: 4
+  name: prow-ingress
+  namespace: prow-prod
+spec:
+  rules:
+  - host: prow.osinfra.cn
+    http:
+      paths:
+      - backend:
+          serviceName: deck
+          servicePort: 80
+        path: "/"
+      - backend:
+          serviceName: gitee-hook
+          servicePort: 8888
+        path: "/gitee-hook"
+      - backend:
+          serviceName: hook
+          servicePort: 8888
+        path: "/hook"
+  tls:
+  - hosts:
+    - prow.osinfra.cn
+    secretName: prow-osinfra-tls
+status:
+  loadBalancer:
+    ingress:
+    - ip: 159.138.8.107
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+  name: prow-ingress-gitee-deck
+  namespace: prow-prod
+spec:
+  rules:
+  - host: prow.osinfra.cn
+    http:
+      paths:
+      - backend:
+          serviceName: gitee-deck
+          servicePort: 80
+        path: "/gitee-deck(/|$)(.*)"
+  tls:
+  - hosts:
+    - prow.osinfra.cn
+    secretName: prow-osinfra-tls
