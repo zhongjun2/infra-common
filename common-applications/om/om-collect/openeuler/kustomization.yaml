@@ -14,4 +14,6 @@ resources:
   - gitee-event
   - report-email
   - meetings
+  - website-repo
+  - website-ru-repo
 namespace: openeuler-om
