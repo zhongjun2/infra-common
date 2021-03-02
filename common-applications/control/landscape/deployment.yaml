@@ -17,11 +17,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: GITEE_GAUSS_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: cve-secrets
-                  key: gitee_gauss_token
             - name: TZ
               value: Asia/Shanghai
           image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape:v1.0.0
