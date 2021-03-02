@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: landscape
+  name: landscape
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: landscape
+  template:
+    metadata:
+      labels:
+        app: landscape
+    spec:
+      containers:
+        - env:
+            - name: GITEE_GAUSS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cve-secrets
+                  key: gitee_gauss_token
+            - name: TZ
+              value: Asia/Shanghai
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape:v1.0.0
+          imagePullPolicy: IfNotPresent
+          name: landscape
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
