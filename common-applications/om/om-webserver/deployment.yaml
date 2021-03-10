@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: om-webserver
-        image: swr.cn-north-4.myhuaweicloud.com/om/om-webserver:1.0.7
+        image: swr.cn-north-4.myhuaweicloud.com/om/om-webserver:0.0.17
         resources:
           requests:
             memory: 100Mi
