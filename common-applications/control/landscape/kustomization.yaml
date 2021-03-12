@@ -1,0 +1,17 @@
+resources:
+- namespace.yaml
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+commonLabels:
+  app: landscape
+namespace: landscape
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
+  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
+  newTag: 1854da6779698241f8f9bcbd113360d1235ae0e7
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/openeuler-website-backend
+  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
+  newTag: eff89e6a11450c61638b8f0637809d438ee541a7
