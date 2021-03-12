@@ -12,4 +12,5 @@ resources:
   - gitee-event
   - report-email
   - meetings
+  - cla
 namespace: opengauss-om

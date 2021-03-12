@@ -12,4 +12,5 @@ resources:
   - gitee-star
   - report-email
   - meetings
+  - cla
 namespace: mindspore-om
