@@ -6,4 +6,10 @@ resources:
 commonLabels:
   common-app: nginx-ingress
 patchesStrategicMerge:
-  - configmap.yaml
+- configmap.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/default_backend
+  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/default_backend
+  newTag: dbf332adbc0a3d44e7c42c88708dee62a9448d48
