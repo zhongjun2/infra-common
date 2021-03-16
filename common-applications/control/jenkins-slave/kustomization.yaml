@@ -8,7 +8,7 @@ kind: Kustomization
 images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/content_moderation
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/content_moderation
-  newTag: "1615811365"
+  newTag: "1615875017"
 - name: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newName: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newTag: c8e6a74b1a84f9df2ae1ee1fb5b92f10dfa07b1a
