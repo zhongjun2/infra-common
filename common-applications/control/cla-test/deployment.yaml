@@ -44,6 +44,11 @@ spec:
                 secretKeyRef:
                   name: cla-secrets
                   key: api-token-key
+            - name: SYMMETRIC_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cla-secrets
+                  key: symmetric-encryption-key
             - name: HTTP_PORT
               value: "80"
             - name: RUN_MODE

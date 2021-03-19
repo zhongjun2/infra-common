@@ -1,0 +1,7 @@
+resources:
+- crd.yaml
+- namespace.yaml
+- secret-manager.yaml
+commonLabels:
+  common-app: secret-manager
+
