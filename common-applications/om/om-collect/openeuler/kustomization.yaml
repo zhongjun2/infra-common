@@ -17,4 +17,5 @@ resources:
   - cla
   - website-repo
   - website-ru-repo
+  - cve
 namespace: openeuler-om
