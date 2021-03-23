@@ -5,3 +5,4 @@ commonLabels:
 patchesStrategicMerge:
   - service.yaml
   - deployment.yaml
+  - tcp_configmap.yaml
