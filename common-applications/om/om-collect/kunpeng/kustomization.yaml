@@ -3,5 +3,6 @@ resources:
   - github
   - gitee
   - website
+  - openlab
   - namespace.yaml
 namespace: kunpeng-om
