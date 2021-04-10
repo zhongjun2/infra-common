@@ -101,8 +101,8 @@ spec:
               cp /etc/exim4/dkim/lists.osinfra.cn.key.ro /etc/exim4/dkim/lists.osinfra.cn.key
               sudo chown root:Debian-exim /etc/exim4/passwd /etc/exim4/exim.crt /etc/exim4/exim.key /etc/exim4/dkim/lists.osinfra.cn.key
               sudo chmod 640 /etc/exim4/passwd /etc/exim4/exim.crt /etc/exim4/exim.key /etc/exim4/dkim/lists.osinfra.cn.key
-              mkdir -p /opt/mailman/exim_log
-              chown Debian-exim:Debian-exim -R /opt/mailman/exim_log
+              mkdir -p /var/log/exim4
+              chown Debian-exim:Debian-exim -R /var/log/exim4
               sudo update-exim4.conf
               exec tini -- exim -bd -v;
       #NOTE: Empty dir can't be used in a production dir. Please upgrade it before using.

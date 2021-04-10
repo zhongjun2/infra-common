@@ -28,6 +28,9 @@ spec:
           volumeMounts:
             - mountPath: /opt/mailman/
               name: mailman-core-volume
+            - mountPath: /usr/lib/python3.6/site-packages/mailman/runners/command.py
+              name: mailman-core-hack-volume
+              subPath: command.py
           env:
             - name: DATABASE_TYPE
               value: postgres
@@ -81,9 +84,14 @@ spec:
             - |
               export DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@mailman-database-0.mail-suit-service.mail.svc.cluster.local/mailmandb
               sed -i "s/charset: us-ascii/charset: utf-8/g" /usr/lib/python3.6/site-packages/mailman/config/schema.cfg;
+              sed -i "s/level: info/level: debug/g" /usr/lib/python3.6/site-packages/mailman/config/schema.cfg;
+              sed -i "s/email_commands_max_lines: 10/email_commands_max_lines: 30/g" /usr/lib/python3.6/site-packages/mailman/config/schema.cfg;
               exec docker-entrypoint.sh master --force
       #NOTE: Empty dir can't be used in a production dir. Please upgrade it before using.
       volumes:
         - name: mailman-core-volume
           persistentVolumeClaim:
             claimName: config-vol
+        - name: mailman-core-hack-volume
+          configMap:
+            name: mailman-webpage-hack
