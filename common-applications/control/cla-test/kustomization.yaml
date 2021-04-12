@@ -16,4 +16,4 @@ images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-backend
   newTag: 22e3ba695f0f624c975eea7286f2bc7964deb21e
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui
-  newTag: 78166c6b64a61399afa8b54158fc76b41665bd93
+  newTag: 52a8d7501d662cbc21580815b87ab77f1c089291
