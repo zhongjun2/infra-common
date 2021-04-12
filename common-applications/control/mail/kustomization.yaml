@@ -1,6 +1,5 @@
 resources:
   - config.yaml
-  - maildatabase.yaml
   - mailcore.yaml
   - mailcoreservice.yaml
   - mtaservice.yaml

@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  name: mailmanweb-ingress
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  name: mailmanweb-ingress-for-osinfra
 spec:
   tls:
     - hosts:
@@ -17,6 +18,20 @@ spec:
               serviceName: mailman-web-service
               servicePort: 80
             path: /
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  name: mailmanweb-ingress-for-openhetuengine
+spec:
+  tls:
+    - hosts:
+        - mailweb.openhetuengine.org
+      secretName: mailman-cert-secrets-foropenhetu
+  rules:
     - host: mailweb.openhetuengine.org
       http:
         paths:
@@ -24,10 +39,4 @@ spec:
               serviceName: mailman-web-service
               servicePort: 80
             path: /
-    - host: mailweb.openhetuengine.org
-      http:
-        paths:
-          - backend:
-              serviceName: mailman-web-service
-              servicePort: 80
-            path: /
+---

@@ -29,10 +29,12 @@ data:
     DKIM_CANON = relaxed
     DKIM_SELECTOR = default
     DKIM_DOMAIN = ${lc:${domain:$h_from:}}
-    DKIM_FILE = /etc/exim4/dkim/lists.osinfra.cn.key
+    DKIM_FILE = /etc/exim4/dkim/dkim.key
     DKIM_PRIVATE_KEY=${if exists{DKIM_FILE}{DKIM_FILE}{0}}
     MAIN_LOG_SELECTOR = +subject +deliver_time +received_sender +return_path_on_delivery +sender_on_delivery +unknown_in_list +smtp_protocol_error +smtp_syntax_error +tls_certificate_verified +tls_peerdn -host_lookup_failed
     MAIN_TLS_ENABLE = yes
+    MAIN_TLS_CERTIFICATE = ${if exists{/etc/exim4/ssl_pool/${tls_sni}.crt}{/etc/exim4/ssl_pool/${tls_sni}.crt}{/etc/exim4/ssl_pool/lists.osinfra.cn.crt}}
+    MAIN_TLS_PRIVATEKEY = ${if exists{/etc/exim4/ssl_pool/${tls_sni}.key}{/etc/exim4/ssl_pool//${tls_sni}.key}{/etc/exim4/ssl_pool/lists.osinfra.cn.key}}
     AUTH_SERVER_ALLOW_NOTLS_PASSWORDS = true
 
   55_mm3_transport: |
@@ -425,16 +427,10 @@ data:
             if part is None:
                 # There was no text/plain part to be found.
                 return
-            body = part.get_payload()
+            body = part.get_payload(decode=True)
             # text/plain parts better have string payloads.
-            assert isinstance(body, (bytes, str)), 'Non-string decoded payload'
-            # NOTE(tommylikehu): decode body string if it's base64 encoded
-            try:
-                body_str = "".join(line.strip() for line in body.splitlines())
-                if base64.b64encode(base64.b64decode(body_str)).decode('ascii') == body_str:
-                    body = base64.b64decode(body_str).decode(results.charset)
-            except Exception:
-                pass
+            assert body is not None, 'Non-string decoded payload'
+            body = body.decode(part.get_content_charset('us-ascii'), errors='replace')
             lines = body.splitlines()
             # Use no more lines than specified
             max_lines = int(config.mailman.email_commands_max_lines)

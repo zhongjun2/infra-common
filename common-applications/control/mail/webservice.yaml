@@ -57,18 +57,18 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: POSTGRES_USER
+            - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
                   name: mailman-secrets
-                  key: postgres_user
-            - name: POSTGRES_PASSWORD
+                  key: mysql_user
+            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mailman-secrets
-                  key: postgres_password
+                  key: mysql_password
             - name: DATABASE_TYPE
-              value: postgres
+              value: mysql
             - name: HYPERKITTY_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -121,7 +121,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              export DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@mailman-database-0.mail-suit-service.mail.svc.cluster.local/mailmandb
+              export DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@192.168.1.3:3306/mailman
               cp /opt/mailman-web-config/settings_local.py /opt/mailman-web-data;
               exec docker-entrypoint.sh uwsgi --ini /opt/mailman-web/uwsgi.ini;
         - name: nginx-web

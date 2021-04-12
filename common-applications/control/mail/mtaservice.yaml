@@ -46,8 +46,7 @@ spec:
     spec:
       containers:
         - name: mailman-exim4
-          #NOTE: This image is directly built from our dockerfile located in exim4 folder
-          image: mindspore/mail-exim4:v0.1.0
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/mailman-exim4:64b901c52c1ce83c2157b335fa1dd5bd2e23089e
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - mountPath: /etc/exim4/conf.d/main/25_mm3_macros
@@ -78,33 +77,42 @@ spec:
               mountPath: /etc/exim4/passwd.ro
               subPath: exim4_credential
             - name: mailman-cert-secrets
-              mountPath: /etc/exim4/exim.crt.ro
+              mountPath: /etc/exim4/osinfra.exim.crt.ro
               subPath: server_crt
             - name: mailman-cert-secrets
-              mountPath: /etc/exim4/exim.key.ro
+              mountPath: /etc/exim4/osinfra.exim.key.ro
               subPath: server_key
             - name: mailman-secrets
-              mountPath: /etc/exim4/dkim/lists.osinfra.cn.key.ro
+              mountPath: /etc/exim4/dkim/dkim.key.ro
               subPath: dkim_key
           # NOTE: since we added new configuration files we need reload exim4 and start up
-          # 1. update password  and key file mode
-          # 2. update the log folder permission
-          # 3. reconfigure exim4
-          # 4. start the service
+          # 1. password used for exim4 login
+          # 2. exim4.crt used for host certificate verification
+          # 3. exim4.key used for message encryption
           command:
             - /bin/sh
             - -c
             - |
+              # copy exim4 password
               cp /etc/exim4/passwd.ro /etc/exim4/passwd
-              cp /etc/exim4/exim.crt.ro /etc/exim4/exim.crt
-              cp /etc/exim4/exim.key.ro /etc/exim4/exim.key
-              cp /etc/exim4/dkim/lists.osinfra.cn.key.ro /etc/exim4/dkim/lists.osinfra.cn.key
-              sudo chown root:Debian-exim /etc/exim4/passwd /etc/exim4/exim.crt /etc/exim4/exim.key /etc/exim4/dkim/lists.osinfra.cn.key
-              sudo chmod 640 /etc/exim4/passwd /etc/exim4/exim.crt /etc/exim4/exim.key /etc/exim4/dkim/lists.osinfra.cn.key
+
+              mkdir -p /etc/exim4/ssl_pool
+              # copy lists.osinfra.cn cert and key file and dkim key file
+              cp /etc/exim4/osinfra.exim.crt.ro /etc/exim4/ssl_pool/lists.osinfra.cn.crt
+              cp /etc/exim4/osinfra.exim.key.ro /etc/exim4/ssl_pool/lists.osinfra.cn.key
+
+              # copy dkim key file to different hosts(use the same key file)
+              cp /etc/exim4/dkim/dkim.key.ro /etc/exim4/dkim/dkim.key
+
+              chown root:Debian-exim /etc/exim4/passwd /etc/exim4/ssl_pool/lists.osinfra.cn.crt /etc/exim4/ssl_pool/lists.osinfra.cn.key  /etc/exim4/dkim/dkim.key
+              chmod 640 /etc/exim4/passwd /etc/exim4/ssl_pool/lists.osinfra.cn.crt /etc/exim4/ssl_pool/lists.osinfra.cn.key  /etc/exim4/dkim/dkim.key
+
+              # prepare log folder
               mkdir -p /var/log/exim4
               chown Debian-exim:Debian-exim -R /var/log/exim4
-              sudo update-exim4.conf
-              exec tini -- exim -bd -v;
+              update-exim4.conf
+              # start exim4
+              exec /tini -- exim -bd -v;
       #NOTE: Empty dir can't be used in a production dir. Please upgrade it before using.
       volumes:
         - name: mailman-exim4-configmap-volume
