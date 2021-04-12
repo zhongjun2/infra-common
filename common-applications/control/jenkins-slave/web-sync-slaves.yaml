@@ -48,8 +48,8 @@ spec:
             - name: JENKINS_USER_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: jenkins-secret
-                  key: password
+                  name: osinfra-jenkins
+                  key: jenkins-slave-token
             - name: JENKINS_AGENT_WORKDIR
               value: /home/jenkins/agent-working-dir
             - name: JENKINS_URL
@@ -118,8 +118,8 @@ spec:
             - name: JENKINS_USER_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: jenkins-secret
-                  key: password
+                  name: osinfra-jenkins
+                  key: jenkins-slave-token
       volumes:
         - name: jenkins-share-config
           emptyDir: {}
