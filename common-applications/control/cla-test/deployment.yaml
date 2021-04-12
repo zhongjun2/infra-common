@@ -39,6 +39,10 @@ spec:
               value: "https://test-clasign.osinfra.cn/"
             - name: MONGODB_NAME
               value: "cla-test"
+            - name: OBS_SERVICE
+              value: "huaweicloud-obs"
+            - name: OBS_BUCKET
+              value: "cla-test"
             - name: API_TOKEN_KEY
               valueFrom:
                 secretKeyRef:
@@ -49,6 +53,11 @@ spec:
                 secretKeyRef:
                   name: cla-secrets
                   key: symmetric-encryption-key
+            - name: SYMMETRIC_ENCRYPTION_NONCE
+              valueFrom:
+                secretKeyRef:
+                  name: cla-secrets
+                  key: symmetric-encryption-nonce
             - name: HTTP_PORT
               value: "80"
             - name: RUN_MODE
@@ -64,6 +73,9 @@ spec:
               name: secret-volume
             - mountPath: /opt/app/conf/platforms/code_platforms.yaml
               subPath: code-platforms
+              name: secret-volume
+            - mountPath: /opt/app/conf/platforms/obs_credential.yaml
+              subPath: obs-credentials
               name: secret-volume
       volumes:
         - name: data-volume
