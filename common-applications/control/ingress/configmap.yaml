@@ -17,3 +17,4 @@ metadata:
 # 50000 jenkins.osinfra.cn's jenkins tunnel port
 data:
   50000: "jenkins/jenkins:50000"
+  50001: "test-jenkins/jenkins:50000"
