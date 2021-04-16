@@ -11,3 +11,12 @@ spec:
   #We need set this into 'Local' since we need get the client IP of elb.
   externalTrafficPolicy: Local
   loadBalancerIP: 159.138.8.107
+  ports:
+    - name: agent1
+      port: 50000
+      protocol: TCP
+      targetPort: 50000
+    - name: agent2
+      port: 50001
+      protocol: TCP
+      targetPort: 50001
