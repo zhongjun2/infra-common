@@ -13,4 +13,5 @@ resources:
   - report-email
   - meetings
   - cla
+  - polymerization
 namespace: mindspore-om
