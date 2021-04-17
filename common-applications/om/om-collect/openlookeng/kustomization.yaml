@@ -11,4 +11,6 @@ resources:
   - gitee-event
   - report-email
   - meetings
+  - polymerization
+  - polymerization-download
 namespace: openlookeng-om
