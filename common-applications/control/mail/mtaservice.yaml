@@ -82,10 +82,10 @@ spec:
             - name: mailman-cert-secrets
               mountPath: /etc/exim4/osinfra.exim.key.ro
               subPath: server_key
-            - name: mailman-cert-secrets-foropenhetu
+            - name: mailman-cert-secrets-foropenhetu-volume
               mountPath: /etc/exim4/openhetuengine.exim.crt.ro
               subPath: server_crt
-            - name: mailman-cert-secrets-foropenhetu
+            - name: mailman-cert-secrets-foropenhetu-volume
               mountPath: /etc/exim4/openhetuengine.exim.key.ro
               subPath: server_key
             - name: mailman-secrets
@@ -137,4 +137,7 @@ spec:
         - name: mailman-cert-secrets
           secret:
             secretName: mailman-cert-secrets
+        - name: mailman-cert-secrets-foropenhetu-volume
+          secret:
+            secretName: mailman-cert-secrets-foropenhetu
 
