@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: mailman-exim4
-          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/mailman-exim4:64b901c52c1ce83c2157b335fa1dd5bd2e23089e
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/mailman-exim4:e6d42d2b5d5c3f0f0fee051796a32e4e371d361f
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - mountPath: /etc/exim4/conf.d/main/25_mm3_macros
@@ -82,6 +82,12 @@ spec:
             - name: mailman-cert-secrets
               mountPath: /etc/exim4/osinfra.exim.key.ro
               subPath: server_key
+            - name: mailman-cert-secrets-foropenhetu
+              mountPath: /etc/exim4/openhetuengine.exim.crt.ro
+              subPath: server_crt
+            - name: mailman-cert-secrets-foropenhetu
+              mountPath: /etc/exim4/openhetuengine.exim.key.ro
+              subPath: server_key
             - name: mailman-secrets
               mountPath: /etc/exim4/dkim/dkim.key.ro
               subPath: dkim_key
@@ -101,6 +107,10 @@ spec:
               cp /etc/exim4/osinfra.exim.crt.ro /etc/exim4/ssl_pool/lists.osinfra.cn.crt
               cp /etc/exim4/osinfra.exim.key.ro /etc/exim4/ssl_pool/lists.osinfra.cn.key
 
+              # copy lists.openhetuengine.org cert and key file and dkim key file
+              cp /etc/exim4/openhetuengine.exim.crt.ro /etc/exim4/ssl_pool/lists.openhetuengine.org.crt
+              cp /etc/exim4/openhetuengine.exim.key.ro /etc/exim4/ssl_pool/lists.openhetuengine.org.key
+
               # copy dkim key file to different hosts(use the same key file)
               cp /etc/exim4/dkim/dkim.key.ro /etc/exim4/dkim/dkim.key
 
@@ -112,7 +122,7 @@ spec:
               chown Debian-exim:Debian-exim -R /var/log/exim4
               update-exim4.conf
               # start exim4
-              exec /tini -- exim -bd -v;
+              exec tini -- exim -bd -v;
       #NOTE: Empty dir can't be used in a production dir. Please upgrade it before using.
       volumes:
         - name: mailman-exim4-configmap-volume

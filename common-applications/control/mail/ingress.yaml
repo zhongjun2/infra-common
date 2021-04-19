@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
   name: mailmanweb-ingress-for-osinfra
 spec:
   tls:
@@ -24,7 +23,6 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
   name: mailmanweb-ingress-for-openhetuengine
 spec:
   tls:
