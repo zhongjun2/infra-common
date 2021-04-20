@@ -286,7 +286,7 @@ data:
     import socket
     import ipaddress
 
-    DEBUG = True
+    DEBUG = False
 
     SITE_ID = 1
 
