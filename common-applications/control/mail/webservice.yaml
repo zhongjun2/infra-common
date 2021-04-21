@@ -123,6 +123,10 @@ spec:
             - |
               export DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@192.168.1.3:3306/mailman
               cp /opt/mailman-web-config/settings_local.py /opt/mailman-web-data;
+              #disable sign up route for mailman web                                                                                                                                                                 │
+              sed -i "s/path(\"signup/#path(\"signup/g" /usr/lib/python3.6/site-packages/allauth/account/urls.py;
+              #disable sigup page for mailman web
+              cp /opt/mailman-web-config/base.html /opt/mailman-web-config/settings_local.py
               exec docker-entrypoint.sh uwsgi --ini /opt/mailman-web/uwsgi.ini;
         - name: nginx-web
           image: nginx:1.19.2
