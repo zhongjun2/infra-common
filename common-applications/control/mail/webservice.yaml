@@ -126,7 +126,7 @@ spec:
               #disable sign up route for mailman web                                                                                                                                                                 │
               sed -i "s/path(\"signup/#path(\"signup/g" /usr/lib/python3.6/site-packages/allauth/account/urls.py;
               #disable sigup page for mailman web
-              cp /opt/mailman-web-config/base.html /opt/mailman-web-config/settings_local.py
+              cp /opt/mailman-web-config/base.html /usr/lib/python3.6/site-packages/postorius/templates/postorius;
               exec docker-entrypoint.sh uwsgi --ini /opt/mailman-web/uwsgi.ini;
         - name: nginx-web
           image: nginx:1.19.2
