@@ -310,7 +310,7 @@ data:
                                     <span class="fa fa-sign-in"></span>
                                     {% trans "Sign In" %}
                                 </a>
-                                <!-- disable signup --<a role="menuitem" tabindex="-1" href="{% url 'account_signup' %}?next={{next|default:request.path|urlencode}}">
+                                <!-- disable signup --<a role="menuitem" tabindex="-1" href="">
                                     <span class="fa fa-user-plus"></span>
                                     {% trans "Sign Up" %}
                                 </a>-->
@@ -366,7 +366,7 @@ data:
                                 <span class="fa fa-sign-in"></span>
                                 {% trans "Sign In" %}
                             </a></li>
-                            <!--disable signup--<li class="nav-item"><a href="{% url 'account_signup' %}?next={{next|default:request.path|urlencode}}" class="nav-link">
+                            <!--disable signup--<li class="nav-item"><a href="">
                                 <span class="fa fa-user-plus"></span>
                                 {% trans "Sign Up" %}
                             </a></li>-->
@@ -574,7 +574,7 @@ data:
                                 <span class="fa fa-sign-in"></span>
                                 {% trans 'Login' %}
                             </a></li>
-                            <!--Signup is disabled--<li  class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}?next={{next|default:request.path|urlencode}}">
+                            <!--Signup is disabled--<li  class="nav-item"><a class="nav-link" href="">
                                 <span class="fa fa-user-plus"></span>
                                 {% trans 'Sign Up' %}
                             </a></li>-->
