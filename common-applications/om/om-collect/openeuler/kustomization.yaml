@@ -19,4 +19,6 @@ resources:
   - website-ru-repo
   - cve
   - polymerization
+  - polymerization-download
+  - polymerization-download-ip
 namespace: openeuler-om
