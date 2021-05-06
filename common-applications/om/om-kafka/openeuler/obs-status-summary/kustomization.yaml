@@ -10,7 +10,7 @@ patches:
 patchesStrategicMerge:
   - secrets.yaml
 images:
-  - name: swr.cn-north-4.myhuaweicloud.com/om/om-kafka
+  - name: swr.cn-north-4.myhuaweicloud.com/om/om-collect
     newName: swr.cn-north-4.myhuaweicloud.com/om/om-kafka
     newTag: 0.0.11
 namePrefix: obs-status-summary-
