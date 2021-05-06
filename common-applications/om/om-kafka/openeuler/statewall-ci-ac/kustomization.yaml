@@ -6,7 +6,7 @@ patches:
       group: extensions
       version: v1beta1
       kind: Deployment
-      name: om-kafka
+      name: om-collect
 patchesStrategicMerge:
   - secrets.yaml
 images:
