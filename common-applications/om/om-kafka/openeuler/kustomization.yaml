@@ -2,4 +2,5 @@ resources:
   - obs-job-history
   - obs-status-summary
   - statewall-ci-ac
+  - namespaces
 namespace: openeuler-kafka
