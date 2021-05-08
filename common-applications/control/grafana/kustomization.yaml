@@ -5,6 +5,10 @@ resources:
   - purge-secret.yaml
 commonLabels:
   app: control-grafana
+images:
+- name: grafana/grafana:7.2.2
+  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/grafana
+  newTag: stable-7.5.x
 patchesStrategicMerge:
   - pvc.yaml
 namespace: monitoring
