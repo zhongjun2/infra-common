@@ -11,7 +11,7 @@ kind: Kustomization
 images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
-  newTag: 6cab9d0446118eaba0547eb0b111a1b67ae4baec
+  newTag: 241c85778c7da1f33131bbde793e9c44fee12bbd
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/openeuler-website-backend
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape
   newTag: eff89e6a11450c61638b8f0637809d438ee541a7
