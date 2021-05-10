@@ -53,7 +53,7 @@ spec:
             - name: SERVICE_NAME
               value: sca-eureka
             - name: APP_ENV
-              value: test
+              value: prod
             - name: PACKAGE_VERSION
               value: 1.0-SNAPSHOT
             - name: MAX_HEAP_MEM
