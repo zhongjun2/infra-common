@@ -18,7 +18,7 @@ spec:
         - name: sca-sec
       containers:
       - name: sca-web
-        image: 172.16.1.156:5000/cloudsca/sca-web:v1
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-web:6a082c8dc57e59acb2e8d7b6b1b37d916559ec3c
         imagePullPolicy: IfNotPresent
         ports:
         - name: app-port

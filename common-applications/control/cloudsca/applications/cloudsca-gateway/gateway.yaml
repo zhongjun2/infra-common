@@ -18,7 +18,7 @@ spec:
         - name: sca-sec
       containers:
       - name: sca-gateway
-        image: 172.16.1.156:5000/cloudsca/gateway-service:v1
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-gateway:6a082c8dc57e59acb2e8d7b6b1b37d916559ec3c
         imagePullPolicy: IfNotPresent
         ports:
         - name: app-port
@@ -31,7 +31,7 @@ spec:
           - name: SERVICE_NAME
             value: sca-gateway
           - name: EUREKA_SERVER
-            value: "http://eureka.sca.svc.cluster.local:9000/eureka/,eureka1.sca.svc.cluster.local"
+            value: "http://eureka-0.eureka:9000/eureka, http://eureka-1.eureka:9000/eureka"
           - name: APP_ENV
             value: test
           - name: PACKAGE_VERSION
