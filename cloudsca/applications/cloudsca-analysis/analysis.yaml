@@ -1,0 +1,69 @@
+# Deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sca-analysis
+  namespace: sca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sca-analysis
+  template:
+    metadata:
+      labels:
+        app: sca-analysis
+    spec:
+      imagePullSecrets:
+        - name: sca-sec
+      containers:
+      - name: sca-analysis
+        image: 172.16.1.156:5000/cloudsca/analysis-service:20210421112830
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: app-port
+          containerPort: 8015
+        env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: SERVICE_NAME
+            value: analysis-service
+          - name: EUREKA_SERVER
+            value: "http://eureka.sca.svc.cluster.local:9000/eureka/,eureka1.sca.svc.cluster.local"
+          - name: APP_ENV
+            value: test
+          - name: PACKAGE_VERSION
+            value: 1.0-SNAPSHOT
+          - name: MAX_HEAP_MEM
+            value: 3072m
+          - name: INIT_HEAP_MEM
+            value: 1024m
+          - name: CMS_IOF
+            value: "75"
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2G
+          limits:
+            cpu: 1000m
+            memory: 4G
+---
+# Service 
+apiVersion: v1
+kind: Service
+metadata:
+  name: sca-analysis
+  namespace: sca
+  labels:
+    app: sca-analysis
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8015
+      protocol: TCP
+      name: analysis-app
+      targetPort: 8015
+  selector:
+    app: sca-analysis

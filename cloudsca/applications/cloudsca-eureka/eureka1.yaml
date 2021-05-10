@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka1
+  namespace: sca
+  labels:
+    app: eureka1
+spec:
+  type: NodePort
+  ports:
+    - port: 9000
+      name: eureka1
+      targetPort: 9000
+  selector:
+    app: eureka1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka1
+  namespace: sca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka1
+  template:
+    metadata:
+      labels:
+        app: eureka1
+    spec:
+      imagePullSecrets:
+        - name: sca-sec
+      containers:
+        - name: eureka1
+          image: 172.16.1.156:5000/cloudsca/sca-eureka:20210421120600
+          ports:
+            - containerPort: 9000
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: EUREKA_SERVER
+              value: "http://eureka.sca.svc.cluster.local:9000/eureka"
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: ${MY_POD_NAME}.eureka
+            - name: SERVICE_NAME
+              value: sca-eureka
+            - name: APP_ENV
+              value: test
+            - name: PACKAGE_VERSION
+              value: 1.0-SNAPSHOT
+            - name: MAX_HEAP_MEM
+              value: 512m
+            - name: INIT_HEAP_MEM
+              value: 256m
+            - name: CMS_IOF
+              value: "75"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              cpu: 800m
+              memory: 1000Mi
