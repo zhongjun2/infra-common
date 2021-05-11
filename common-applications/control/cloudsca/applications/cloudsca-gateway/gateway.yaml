@@ -42,6 +42,8 @@ spec:
             value: 512m
           - name: CMS_IOF
             value: "75"
+          - name: INIT_KEY
+            value: xxx
         resources:
           requests:
             cpu: 200m
