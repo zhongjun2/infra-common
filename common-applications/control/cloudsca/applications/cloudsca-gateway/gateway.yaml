@@ -43,7 +43,10 @@ spec:
           - name: CMS_IOF
             value: "75"
           - name: INIT_KEY
-            value: xxx
+            valueFrom:
+              sercretKeyRef:
+                name: secrets/data/infra-common/sca
+                key: app-init-key
         resources:
           requests:
             cpu: 200m

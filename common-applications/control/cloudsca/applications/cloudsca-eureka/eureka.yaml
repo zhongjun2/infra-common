@@ -3,11 +3,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: eureka
-  namespace: devops
+  namespace: sca
   labels:
     app: eureka
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 9000
       name: eureka
@@ -19,7 +19,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: eureka
-  namespace: devops
+  namespace: sca
 spec:
   replicas: 2
   serviceName: "eureka"
@@ -38,9 +38,6 @@ spec:
           image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-eureka:9c9603758450d2c4cb107acea0d9d90ce0a7db17
           ports:
             - containerPort: 9000
-          volumeMounts: 
-            - name: datalog
-              mountPath: /data/log
           env:
             - name: MY_POD_NAME
               valueFrom:
@@ -69,7 +66,3 @@ spec:
             limits:
               cpu: 500m
               memory: 600Mi
-      volumes:
-      - name: datalog
-        hostPath: 
-          path: /data/sca/app/log
