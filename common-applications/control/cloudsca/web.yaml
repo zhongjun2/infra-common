@@ -1,0 +1,58 @@
+# Deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sca-web
+  namespace: sca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sca-web
+  template:
+    metadata:
+      labels:
+        app: sca-web
+    spec:
+      imagePullSecrets:
+        - name: sca-sec
+      containers:
+      - name: sca-web
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-web:6a082c8dc57e59acb2e8d7b6b1b37d916559ec3c
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: app-port
+          containerPort: 8015
+        env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: SERVICE_NAME
+            value: sca-web
+        resources:
+          requests:
+            cpu: 300m
+            memory: 500Mi
+          limits:
+            cpu: 2000m
+            memory: 2048Mi
+  
+---
+# Service 
+apiVersion: v1
+kind: Service
+metadata:
+  name: sca-web
+  namespace: sca
+  labels:
+    app: sca-web
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8528
+      name: web-app
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: sca-web
