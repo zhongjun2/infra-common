@@ -18,7 +18,7 @@ spec:
         - name: sca-sec
       containers:
       - name: sca-gateway
-        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-gateway:6a082c8dc57e59acb2e8d7b6b1b37d916559ec3c
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-gateway:2da74f4f19e420bdc7233954881e632c1c57eae0
         imagePullPolicy: IfNotPresent
         ports:
         - name: app-port
