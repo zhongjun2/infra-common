@@ -18,7 +18,7 @@ spec:
         - name: sca-sec
       containers:
       - name: sca-analysis
-        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis:6d158acc956e84c49500b183a0ad5703bb77d7d6
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis:e1b863e208fb911262cf8759dd480221b5849871
         imagePullPolicy: IfNotPresent
         ports:
         - name: app-port
@@ -59,7 +59,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sca-analysissca-web
+  name: sca-analysis
   namespace: sca
   labels:
     app: sca-analysis
