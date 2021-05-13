@@ -35,7 +35,7 @@ spec:
         - name: sca-sec
       containers:
         - name: eureka
-          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-eureka:9c9603758450d2c4cb107acea0d9d90ce0a7db17
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-eureka:2da74f4f19e420bdc7233954881e632c1c57eae0
           ports:
             - containerPort: 9000
           env:
