@@ -18,7 +18,7 @@ spec:
         - name: sca-sec
       containers:
       - name: sca-dm
-        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-datamanager:2da74f4f19e420bdc7233954881e632c1c57eae0
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-datamanager:6d158acc956e84c49500b183a0ad5703bb77d7d6
         imagePullPolicy: IfNotPresent
         ports:
         - name: app-port
