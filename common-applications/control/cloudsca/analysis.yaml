@@ -1,0 +1,74 @@
+# Deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sca-analysis
+  namespace: sca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sca-analysis
+  template:
+    metadata:
+      labels:
+        app: sca-analysis
+    spec:
+      imagePullSecrets:
+        - name: sca-sec
+      containers:
+      - name: sca-analysis
+        image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis:e1b863e208fb911262cf8759dd480221b5849871
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: app-port
+          containerPort: 8015
+        env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: SERVICE_NAME
+            value: analysis-service
+          - name: EUREKA_SERVER
+            value: "http://eureka-0.eureka:9000/eureka, http://eureka-1.eureka:9000/eureka"
+          - name: APP_ENV
+            value: prod
+          - name: PACKAGE_VERSION
+            value: 1.0-SNAPSHOT
+          - name: MAX_HEAP_MEM
+            value: 3072m
+          - name: INIT_HEAP_MEM
+            value: 1024m
+          - name: CMS_IOF
+            value: "75"
+          - name: INIT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: sca-secret
+                key: app-init-key
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2G
+          limits:
+            cpu: 1000m
+            memory: 4G
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: sca-analysis
+  namespace: sca
+  labels:
+    app: sca-analysis
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8015
+      protocol: TCP
+      name: analysis-app
+      targetPort: 8015
+  selector:
+    app: sca-analysis
