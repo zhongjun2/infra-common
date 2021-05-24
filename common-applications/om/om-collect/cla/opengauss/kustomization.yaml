@@ -1,4 +1,0 @@
-resources:
-  - transform-data
-  - namespace.yaml
-namespace: opengauss-om
