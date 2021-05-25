@@ -15,4 +15,5 @@ resources:
   - cla
   - polymerization
   - polymerization-download
+  - git_commit
 namespace: opengauss-om
