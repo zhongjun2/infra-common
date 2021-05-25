@@ -13,7 +13,7 @@ images:
   newTag: "1615875017"
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/website_sync
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/website_sync
-  newTag: 6434b721f5cb94f19cc319115b5607d1eeb9bbff
+  newTag: 2771c66be5e47bcae150ea78f3562d8329cbc490
 - name: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newName: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newTag: c8e6a74b1a84f9df2ae1ee1fb5b92f10dfa07b1a
