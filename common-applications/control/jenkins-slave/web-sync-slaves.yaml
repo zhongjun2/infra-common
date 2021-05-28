@@ -48,7 +48,7 @@ spec:
             - name: JENKINS_USER_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: jenkins-slave-token
             - name: JENKINS_AGENT_WORKDIR
               value: /home/jenkins/agent-working-dir
@@ -118,7 +118,7 @@ spec:
             - name: JENKINS_USER_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: jenkins-slave-token
       volumes:
         - name: jenkins-share-config
