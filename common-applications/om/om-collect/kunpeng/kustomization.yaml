@@ -4,5 +4,6 @@ resources:
   - gitee
   - website
   - openlab
+  - git_commit
   - namespace.yaml
 namespace: kunpeng-om

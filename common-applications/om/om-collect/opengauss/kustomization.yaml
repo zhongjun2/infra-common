@@ -16,4 +16,5 @@ resources:
   - polymerization
   - polymerization-download
   - accountOrg
+  - git_commit
 namespace: opengauss-om

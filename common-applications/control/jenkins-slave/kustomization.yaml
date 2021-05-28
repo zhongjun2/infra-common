@@ -3,6 +3,7 @@ resources:
 - secrets.yaml
 - openeuler-pr-check-slaves.yaml
 - web-sync-slaves.yaml
+- license-check-slave.yaml
 namespace: jenkins
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
@@ -12,7 +13,7 @@ images:
   newTag: "1615875017"
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/website_sync
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/website_sync
-  newTag: 1bba8e3ba2d0e8425be23cd18e2f1596a04173c5
+  newTag: 6434b721f5cb94f19cc319115b5607d1eeb9bbff
 - name: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newName: swr.cn-north-4.myhuaweicloud.com/om/om-data
   newTag: c8e6a74b1a84f9df2ae1ee1fb5b92f10dfa07b1a
