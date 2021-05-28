@@ -21,4 +21,5 @@ resources:
   - polymerization
   - polymerization-download
   - polymerization-download-ip
+  - accountOrg
 namespace: openeuler-om
