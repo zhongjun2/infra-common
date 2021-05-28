@@ -1,5 +1,5 @@
 [
 	{"op": "remove", "path": "/spec/template/spec/containers/0/volumeMounts"},
-	{"op": "add", "path": "/spec/template/spec/containers/0/volumeMounts", "value": [{"mountPath": "/var/lib/om/config.ini", "subPath": "credentials_cfg", "name": "om-collect-secrets-volume"}, {"mountPath": "/var/lib/om/email_userid.csv", "subPath": "email_userid.csv", "name": "om-collect-secrets-volume"}]},
-	{"op": "replace", "path": "/spec/template/spec/volumes/0/secret/secretName", "value": "account_org-om-secrets"}
+	{"op": "add", "path": "/spec/template/spec/containers/0/volumeMounts", "value": [{"mountPath": "/var/lib/om/config.ini", "subPath": "credentials_cfg", "name": "om-collect-secrets-volume"}, {"mountPath": "/var/lib/om/email_userid.csv", "subPath": "email_userid", "name": "om-collect-secrets-volume"}]},
+	{"op": "replace", "path": "/spec/template/spec/volumes/0/secret/secretName", "value": "account-org-om-secrets"}
 ]
