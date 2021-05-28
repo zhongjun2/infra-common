@@ -15,5 +15,5 @@ resources:
   - polymerization
   - polymerization-download
   - polymerization-download-ip
-  - accountOrg
+  - account_org
 namespace: mindspore-om
