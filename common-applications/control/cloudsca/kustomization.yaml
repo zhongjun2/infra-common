@@ -12,3 +12,7 @@ commonLabels:
 namespace: sca
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+images:
+- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis
+  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis
+  newTag: 27acac3bde1e286f6eea0410d7c8c8725b01d05e
