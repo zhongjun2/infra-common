@@ -101,22 +101,22 @@ spec:
             - name: ACCOUNT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: account_username
             - name: REGION
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: region
             - name: IAM_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: iam_username
             - name: IAM_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: osinfra-jenkins
+                  name: osinfra-jenkins-check
                   key: iam_password
       volumes:
         - name: jenkins-share-config
