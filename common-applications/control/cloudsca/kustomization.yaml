@@ -15,7 +15,7 @@ kind: Kustomization
 images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-analysis
-  newTag: 4f9a2b8b263437f763d9d12d9234e5c13d5dfc6d
+  newTag: 808ed1c642d74824959d6c9c4d7b86bdf1e696ec
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-datamanager
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/sca-datamanager
   newTag: beb0efd1c6fd83aaf5c28f05e0b39f2895e87b8d
