@@ -21,6 +21,5 @@ resources:
   - polymerization
   - polymerization-download
   - polymerization-download-ip
-  - gitee-event-repo-log
   - account_org
 namespace: openeuler-om
