@@ -1,0 +1,8 @@
+resources:
+  - ../../../common-services/nginx-ingress
+commonLabels:
+  app: openeuler-mos-ingress
+patchesStrategicMerge:
+  - service.yaml
+  - deployment.yaml
+  - tcp_configmap.yaml
