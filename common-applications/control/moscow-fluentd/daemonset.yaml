@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: fluentd-config
+      containers:
+        - name: fluentd
+          volumeMounts:
+            - name: config-volume
+              mountPath: /fluentd/etc/kubernetes.conf
+              subPath: kubernetes.conf
+          env:
+            - name:  FLUENT_ELASTICSEARCH_HOST
+              value: "192.168.0.235"
+            - name:  FLUENT_ELASTICSEARCH_PORT
+              value: "9200"
+            - name: FLUENT_ELASTICSEARCH_SCHEME
+              value: "https"
+            - name: FLUENT_ELASTICSEARCH_SSL_VERIFY
+              value: "false"
+            - name: FLUENTD_SYSTEMD_CONF
+              value: "false"
+            - name: FLUENT_ELASTICSEARCH_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fluentd-secrets
+                  key: es_username
+            - name: FLUENT_ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fluentd-secrets
+                  key: es_password
