@@ -143,12 +143,14 @@ spec:
         - name: config
           configMap:
             name: standalone-vault-config
+      imagePullSecrets:
+        - name: huawei-swr-image-pull-secret
       containers:
         - name: vault
           securityContext:
             capabilities:
               add: ["IPC_LOCK"]
-          image: vault:1.3.2
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/vault:1.3.2
           imagePullPolicy: IfNotPresent
           command:
             - "/bin/sh"
