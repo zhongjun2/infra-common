@@ -19,6 +19,7 @@ spec:
       serviceAccountName: imagepullsecret-patcher
       containers:
         - name: imagepullsecret-patcher
+          imagePullPolicy: Always
           image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/imagepullsecret-patcher:v0.14
           env:
             - name: CONFIG_FORCE
