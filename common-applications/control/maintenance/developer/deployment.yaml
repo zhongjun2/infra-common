@@ -9,6 +9,7 @@ spec:
     spec:
       containers:
         - name: maintenance-server
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/maintenance-server:aa535b5abaf2208a44be6101322b98bcb8877595
           env:
             # expose readonly k9s to our developers
             - name: START_CMD
