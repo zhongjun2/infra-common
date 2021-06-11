@@ -3,5 +3,3 @@ kind: ConfigMap
 metadata:
   name: tcp-services
   namespace: ingress-nginx
-data:
-  30873: "repo-mirror/repo-service:873"
