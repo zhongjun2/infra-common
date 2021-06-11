@@ -19,7 +19,7 @@ spec:
         - env:
             - name: TZ
               value: Asia/Shanghai
-          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/landscape:v1.0.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/landscape:241c85778c7da1f33131bbde793e9c44fee12bbd
           imagePullPolicy: IfNotPresent
           name: landscape
           ports:
