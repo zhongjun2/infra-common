@@ -11,7 +11,7 @@ spec:
         ingress: "true"
       containers:
         - name: nginx-ingress-controller
-          image: opensourceway/ingress-nginx-controller-with-purge-cache:v0.35.0.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/ingress-nginx-controller-with-purge-cache:v0.35.0.0
           resources:
             requests:
               cpu: 4000m
