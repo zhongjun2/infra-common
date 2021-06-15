@@ -3,5 +3,5 @@ resources:
 namespace: kube-system
 images:
   - name: k8s.gcr.io/metrics-server/metrics-server
-    newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/metrics-server
+    newName: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server
     newTag: v0.3.7
