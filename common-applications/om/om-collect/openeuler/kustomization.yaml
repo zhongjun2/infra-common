@@ -9,8 +9,6 @@ resources:
   - namespace.yaml
   - gitee-star
   - collect-data
-  - gitee-incubator
-  - gitee-competition
   - gitee-event
   - report-email
   - meetings
