@@ -1,0 +1,8 @@
+resources:
+- ../image-secret-patcher/
+commonLabels:
+  common-app: imagepullsecret-patcher
+patchesStrategicMerge:
+  - deployment.yaml
+namespace: imagepullsecret-patcher
+
