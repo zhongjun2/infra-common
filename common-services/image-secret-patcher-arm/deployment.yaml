@@ -1,0 +1,12 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imagepullsecret-patcher
+  namespace: imagepullsecret-patcher
+spec:
+  template:
+    spec:
+      containers:
+        - name: imagepullsecret-patcher
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/imagepullsecret-patcher-arm:v0.14
