@@ -58,6 +58,8 @@ kind: ServiceAccount
 metadata:
   name: metrics-server
   namespace: kube-system
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: apps/v1
 kind: Deployment
