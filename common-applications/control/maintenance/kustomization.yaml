@@ -8,8 +8,5 @@ resources:
 commonLabels:
   app: control-maintenance
 namespace: maintenance
-images:
-- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/maintenance-server
-  newTag: aa535b5abaf2208a44be6101322b98bcb8877595
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
