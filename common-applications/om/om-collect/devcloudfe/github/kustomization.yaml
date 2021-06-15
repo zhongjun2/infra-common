@@ -3,4 +3,8 @@ resources:
 patchesStrategicMerge:
   - secrets.yaml
   - deployment.yaml
+images:
+  - name: swr.cn-north-4.myhuaweicloud.com/om/om-collect
+    newName: swr.cn-north-4.myhuaweicloud.com/om/om-collect
+    newTag: 0.0.2
 namePrefix: git-
