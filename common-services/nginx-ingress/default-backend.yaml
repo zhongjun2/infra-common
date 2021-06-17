@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: nginx-ingress-default-backend
-          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/default_backend:dbf332adbc0a3d44e7c42c88708dee62a9448d48
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/default_backend:dbf332adbc0a3d44e7c42c88708dee62a9448d48
           env:
             - name: NODE_ENV
               value: production
