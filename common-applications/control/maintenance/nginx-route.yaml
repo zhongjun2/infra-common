@@ -119,7 +119,7 @@ spec:
         component: nginx-route
     spec:
       containers:
-        - image: nginx:latest
+        - image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/nginx:latest
           name: nginx-route
           volumeMounts:
             - mountPath: /etc/nginx/nginx.conf

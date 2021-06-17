@@ -41,7 +41,7 @@ spec:
       containers:
         - name: mailman-web
           # We modified the mail-web image to add static folder.
-          image: maxking/mailman-web:0.3.5
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/mailman-web:0.3.5
           imagePullPolicy: "Always"
           volumeMounts:
             - mountPath: /opt/mailman-web-config
@@ -129,7 +129,7 @@ spec:
               cp /opt/mailman-web-config/base2.html /usr/lib/python3.6/site-packages/hyperkitty/templates/hyperkitty/base.html
               exec docker-entrypoint.sh uwsgi --ini /opt/mailman-web/uwsgi.ini;
         - name: nginx-web
-          image: nginx:1.19.2
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/nginx:latest
           volumeMounts:
             - mountPath: /etc/nginx/nginx.conf
               name: mailman-nginx-configmap-volume
