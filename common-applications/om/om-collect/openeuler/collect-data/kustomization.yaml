@@ -11,6 +11,6 @@ patchesStrategicMerge:
   - secrets.yaml
 images:
   - name: swr.cn-north-4.myhuaweicloud.com/om/om-collect
-    newName: swr.cn-north-4.myhuaweicloud.com/om/om-collection.
+    newName: swr.cn-north-4.myhuaweicloud.com/om/om-collection
     newTag: 0.1.28
 namePrefix: collect-data-
