@@ -27,7 +27,7 @@ spec:
           requests:
             memory: 500Mi
         volumeMounts:
-        - mountPath: /override.cfg
+        - mountPath: /var/lib/om/config.ini
           name: om-collect-secrets-volume
           subPath: credentials_cfg
       volumes:
