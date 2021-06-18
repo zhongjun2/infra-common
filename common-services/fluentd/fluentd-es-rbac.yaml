@@ -62,8 +62,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: fluentd
-          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/fluentd-kubernetes-daemonset:v1
-            .10.3-debian-elasticsearch7-1.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/fluentd-kubernetes-daemonset:v1.10.3-debian-elasticsearch7-1.0
           resources:
             limits:
               memory: 400Mi
