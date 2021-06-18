@@ -2128,6 +2128,8 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
   name: argocd-application-controller
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -2137,6 +2139,8 @@ metadata:
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
   name: argocd-dex-server
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -2146,6 +2150,8 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
   name: argocd-server
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -2591,7 +2597,7 @@ spec:
             - "20"
             - --operation-processors
             - "10"
-          image: argoproj/argocd:v1.7.8
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/argocd:v1.7.8
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -2631,7 +2637,7 @@ spec:
         - command:
             - /shared/argocd-util
             - rundex
-          image: quay.io/dexidp/dex:v2.22.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/dexidp:v2.22.0
           imagePullPolicy: Always
           name: dex
           ports:
@@ -2647,7 +2653,7 @@ spec:
             - -n
             - /usr/local/bin/argocd-util
             - /shared
-          image: argoproj/argocd:v1.7.8
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/argocd:v1.7.8
           imagePullPolicy: Always
           name: copyutil
           volumeMounts:
@@ -2681,7 +2687,7 @@ spec:
             - ""
             - --appendonly
             - "no"
-          image: redis:5.0.8
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/redis:5.0.8
           imagePullPolicy: Always
           name: redis
           ports:
@@ -2717,7 +2723,7 @@ spec:
             - argocd-repo-server
             - --redis
             - argocd-redis:6379
-          image: argoproj/argocd:v1.7.8
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/argocd:v1.7.8
           imagePullPolicy: Always
           name: argocd-repo-server
           ports:
@@ -2772,7 +2778,7 @@ spec:
             - argocd-server
             - --staticassets
             - /shared/app
-          image: argoproj/argocd:v1.7.8
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/argocd:v1.7.8
           imagePullPolicy: Always
           name: argocd-server
           ports:
