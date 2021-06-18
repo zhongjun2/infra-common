@@ -1,4 +1,0 @@
-resources:
-  - mos-download
-  - namespace.yaml
-namespace: openeuler-om
