@@ -4,6 +4,8 @@ kind: ServiceAccount
 metadata:
   name: fluentd
   namespace: kube-system
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
