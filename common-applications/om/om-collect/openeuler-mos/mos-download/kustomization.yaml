@@ -3,8 +3,8 @@ resources:
 patches:
   - path: deploy.json
     target:
-      group: extensions
-      version: v1beta1
+      group: apps
+      version: v1
       kind: Deployment
       name: om-collect
 patchesStrategicMerge:
