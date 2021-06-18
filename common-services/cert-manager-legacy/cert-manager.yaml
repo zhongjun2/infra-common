@@ -5577,6 +5577,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "cainjector"
     helm.sh/chart: cert-manager-v0.14.2
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 # Source: cert-manager/templates/serviceaccount.yaml
 apiVersion: v1
@@ -5592,6 +5594,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "controller"
     helm.sh/chart: cert-manager-v0.14.2
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 # Source: cert-manager/templates/webhook-serviceaccount.yaml
 apiVersion: v1
@@ -5606,6 +5610,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "webhook"
     helm.sh/chart: cert-manager-v0.14.2
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 # Source: cert-manager/templates/cainjector-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -6217,7 +6223,7 @@ spec:
       serviceAccountName: cert-manager-cainjector
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-cainjector:v0.14.2"
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cert-manager-cainjector:v0.14.2
           imagePullPolicy: IfNotPresent
           args:
             - --v=2
@@ -6267,7 +6273,7 @@ spec:
       serviceAccountName: cert-manager
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-controller:v0.14.2"
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cert-manager-controller:v0.14.2
           imagePullPolicy: IfNotPresent
           args:
             - --v=2
@@ -6322,7 +6328,7 @@ spec:
       serviceAccountName: cert-manager-webhook
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-webhook:v0.14.2"
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cert-manager-webhook:v0.14.2
           imagePullPolicy: IfNotPresent
           args:
             - --v=2
