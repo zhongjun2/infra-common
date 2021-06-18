@@ -2128,6 +2128,8 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
   name: argocd-application-controller
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -2137,6 +2139,8 @@ metadata:
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
   name: argocd-dex-server
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -2146,6 +2150,8 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
   name: argocd-server
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
