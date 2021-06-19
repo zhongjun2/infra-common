@@ -5,6 +5,6 @@ commonAnnotations:
   email: "tommylikehu@gmail.com"
 namespace: kube-system
 images:
-  - name: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server:v0.3.7
+  - name: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server
     newName: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server-arm64
     newTag: v0.3.7
