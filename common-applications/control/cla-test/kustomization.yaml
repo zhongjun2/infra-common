@@ -9,6 +9,9 @@ resources:
 - ingress-backend.yaml
 commonLabels:
   app: infrastructure-cla
+commonAnnotations:
+  owner: chenzeng
+  email: "chenzeng765@163.com"
 namespace: cla-test
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
