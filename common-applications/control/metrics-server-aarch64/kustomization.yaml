@@ -1,12 +1,10 @@
 resources:
   - ../../../common-services/metric-server
-patchesStrategicMerge:
-  - deployment.yaml
 commonAnnotations:
   owner: tommylikehu
   email: "tommylikehu@gmail.com"
 namespace: kube-system
 images:
-  - name: k8s.gcr.io/metrics-server/metrics-server
+  - name: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server:v0.3.7
     newName: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server-arm64
     newTag: v0.3.7
