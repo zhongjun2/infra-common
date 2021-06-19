@@ -3,6 +3,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: nginx-purger-serviceaccount
+imagePullSecrets:
+- name: huawei-swr-image-pull-secret
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
