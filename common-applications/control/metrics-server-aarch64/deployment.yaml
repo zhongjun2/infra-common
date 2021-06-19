@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-server
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: metrics-server
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/metrics-server-arm64:v0.3.7
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi

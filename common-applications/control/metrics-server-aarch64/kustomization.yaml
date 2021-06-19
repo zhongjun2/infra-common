@@ -1,5 +1,10 @@
 resources:
   - ../../../common-services/metric-server
+patchesStrategicMerge:
+  - deployment.yaml
+commonAnnotations:
+  owner: tommylikehu
+  email: "tommylikehu@gmail.com"
 namespace: kube-system
 images:
   - name: k8s.gcr.io/metrics-server/metrics-server
