@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: etherpad-lite
-          image: etherpad/etherpad:1.8.6
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/etherpad:1.8.6
           imagePullPolicy: IfNotPresent
           env:
             - name: SKIN_NAME
