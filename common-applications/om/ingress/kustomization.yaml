@@ -2,6 +2,9 @@ resources:
   - ../../../common-services/nginx-ingress
 commonLabels:
   app: om-ingress
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 patchesStrategicMerge:
   - service.yaml
   - deployment.yaml

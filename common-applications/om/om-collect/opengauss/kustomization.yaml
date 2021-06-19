@@ -17,4 +17,7 @@ resources:
   - polymerization-download
   - account_org
   - git_commit
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: opengauss-om

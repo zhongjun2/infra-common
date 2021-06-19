@@ -2,4 +2,7 @@ resources:
   - git
   - gitee
   - namespace.yaml
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: hongmeng-om

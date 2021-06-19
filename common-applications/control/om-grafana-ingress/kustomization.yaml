@@ -5,6 +5,9 @@ resources:
   - secrets.yaml
 commonLabels:
   app: control-om-grafana
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesJson6902:
   - target:
       group: ""

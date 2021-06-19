@@ -2,6 +2,9 @@ resources:
   - ../../../common-services/nginx-ingress
 commonLabels:
   app: mindspore-cn-north4-ingress
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - service.yaml
   - deployment.yaml

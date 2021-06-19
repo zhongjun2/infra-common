@@ -6,5 +6,8 @@ resources:
   - nginx-purger.yaml
 commonLabels:
   app: osinfra-api
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 namespace: osinfra-api
 

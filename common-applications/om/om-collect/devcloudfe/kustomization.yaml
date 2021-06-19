@@ -3,4 +3,7 @@ resources:
   - github
   - clone
   - namespace.yaml
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: devcloudfe-om

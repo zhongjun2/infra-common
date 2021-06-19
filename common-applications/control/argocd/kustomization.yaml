@@ -6,6 +6,9 @@ resources:
   - oauth-proxy.yaml
 commonLabels:
   app: control-argocd
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - deployment.yaml
 namespace: argocd
