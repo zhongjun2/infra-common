@@ -13,4 +13,7 @@ resources:
   - meetings
   - polymerization
   - polymerization-download
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: openlookeng-om

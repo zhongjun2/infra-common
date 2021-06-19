@@ -1,5 +1,8 @@
 resources:
   - ingress.yaml
   - secrets.yaml
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: monitoring
 

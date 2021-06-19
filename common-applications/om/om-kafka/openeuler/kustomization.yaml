@@ -3,4 +3,7 @@ resources:
   - obs-status-summary
   - statewall-ci-ac
   - namespace.yaml
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: openeuler-kafka

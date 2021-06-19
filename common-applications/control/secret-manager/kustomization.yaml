@@ -2,6 +2,9 @@ resources:
   - ../../../common-services/secret-manager
 commonLabels:
   app: control-secret-manager
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - deployment.yaml
 

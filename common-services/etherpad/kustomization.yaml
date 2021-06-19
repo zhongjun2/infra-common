@@ -2,10 +2,6 @@ resources:
 - configmap.yaml
 - deployment.yaml
 - pvc.yaml
-- secret.yaml
 - service.yaml
-commonAnnotations:
-  owner: tommylike
-  email: "tommylikehu@gmail.com"
 commonLabels:
   common-app: etherpad
