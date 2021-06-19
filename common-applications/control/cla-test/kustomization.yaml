@@ -9,11 +9,14 @@ resources:
 - ingress-backend.yaml
 commonLabels:
   app: infrastructure-cla
+commonAnnotations:
+  owner: chenzeng
+  email: "chenzeng765@163.com"
 namespace: cla-test
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-backend
+- name: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cla-backend
   newTag: 78e331d2d6694f67ab205ccb106597f53008b477
-- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui
+- name: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cla-webui
   newTag: 0559cdcb89270179268a62ef161cb2b63af8cf6d

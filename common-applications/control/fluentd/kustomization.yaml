@@ -3,6 +3,9 @@ resources:
   - secrets.yaml
 commonLabels:
   app: control-fluentd
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - daemonset.yaml
 namespace: kube-system

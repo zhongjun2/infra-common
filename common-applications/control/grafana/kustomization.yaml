@@ -5,6 +5,9 @@ resources:
   - purge-secret.yaml
 commonLabels:
   app: control-grafana
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 images:
 - name: grafana/grafana:7.2.2
   newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/grafana

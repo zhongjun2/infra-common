@@ -15,7 +15,7 @@ spec:
         component: cla-backend
     spec:
       containers:
-        - image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-backend:0.0.1
+        - image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cla-backend:0.0.1
           imagePullPolicy: IfNotPresent
           name: cla-backend-pod
           ports:
@@ -103,7 +103,7 @@ spec:
         component: cla-frontend
     spec:
       containers:
-        - image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui:aebbf8682914e3ad42abd850eab675ecfa8b0159
+        - image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/cla-webui:aebbf8682914e3ad42abd850eab675ecfa8b0159
           imagePullPolicy: IfNotPresent
           name: cla-frontend-pod
           ports:
