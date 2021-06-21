@@ -10,6 +10,9 @@ resources:
   - suiteservice.yaml
   - webservice.yaml
   - ingress.yaml
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 namespace: mail
 commonLabels:
   solution: control-maillist

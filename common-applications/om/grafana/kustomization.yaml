@@ -3,6 +3,9 @@ resources:
   - namespace.yaml
 commonLabels:
   app: control-om-grafana
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 patchesStrategicMerge:
   - pvc.yaml
   - service.yaml

@@ -1,6 +1,9 @@
 resources:
   - ../../../common-services/cert-manager
   - cluster-issuer.yaml
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 commonLabels:
   app: control-cert-manager
 

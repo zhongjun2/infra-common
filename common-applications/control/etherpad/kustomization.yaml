@@ -5,6 +5,9 @@ resources:
   - namespace.yaml
 commonLabels:
   app: control-etherpad
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - configmap.yaml
   - pvc.yaml

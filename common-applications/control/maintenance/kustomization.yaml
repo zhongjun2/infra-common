@@ -7,6 +7,9 @@ resources:
 - nginx-route.yaml
 commonLabels:
   app: control-maintenance
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 namespace: maintenance
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization

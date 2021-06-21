@@ -2,6 +2,9 @@ resources:
   - ../../../common-services/nginx-ingress
 commonLabels:
   app: control-ingress
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 patchesStrategicMerge:
   - service.yaml
   - deployment.yaml

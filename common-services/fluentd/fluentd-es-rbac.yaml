@@ -4,6 +4,8 @@ kind: ServiceAccount
 metadata:
   name: fluentd
   namespace: kube-system
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -62,7 +64,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: fluentd
-          image: fluent/fluentd-kubernetes-daemonset:v1.10.3-debian-elasticsearch7-1.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/fluentd-kubernetes-daemonset:v1.10.3-debian-elasticsearch7-1.0
           resources:
             limits:
               memory: 400Mi

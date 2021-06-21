@@ -17,7 +17,7 @@ spec:
                 restartPolicy: Never
                 containers:
                   - name: curl-service-endpoint
-                    image: curlimages/curl:7.73.0
+                    image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/curl:7.73.0
                     command:
                       - /bin/sh
                       - -c

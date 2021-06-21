@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argocd-notifications-controller
+imagePullSecrets:
+  - name: huawei-swr-image-pull-secret
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -112,7 +114,7 @@ spec:
         - command:
             - /app/argocd-notifications
             - controller
-          image: argoprojlabs/argocd-notifications:v0.7.0
+          image: swr.cn-north-4.myhuaweicloud.com/opensourceway/common/argocd-notifications:v0.7.0
           imagePullPolicy: Always
           name: argocd-notifications-controller
           workingDir: /app

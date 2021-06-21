@@ -7,6 +7,9 @@ resources:
   - oauth-proxy.yaml
 commonLabels:
   app: control-vault
+commonAnnotations:
+  owner: tommylike
+  email: "tommylikehu@gmail.com"
 namespace: vault
 patchesStrategicMerge:
   - statefulset.yaml

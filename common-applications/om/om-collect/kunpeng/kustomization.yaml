@@ -6,4 +6,7 @@ resources:
   - openlab
   - git_commit
   - namespace.yaml
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: kunpeng-om

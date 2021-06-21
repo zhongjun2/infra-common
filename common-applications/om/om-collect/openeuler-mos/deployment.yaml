@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: om-collect
+    common-app: om
+  name: mos-download-om-collect
+  namespace: openeuler-om
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      common-app: om
+  template:
+    metadata:
+      labels:
+        app: om-collect
+        common-app: om
+    spec:
+      containers:
+      - image: swr.cn-north-4.myhuaweicloud.com/om/om-collection:0.1.29
+        name: om-collect
+        ports:
+        - containerPort: 3306
+          name: om-collect
+        resources:
+          requests:
+            memory: 500Mi
+        volumeMounts:
+        - mountPath: /var/lib/om/config.ini
+          name: om-collect-secrets-volume
+          subPath: credentials_cfg
+      volumes:
+      - name: om-collect-secrets-volume
+        secret:
+          secretName: mos-download-om-secrets

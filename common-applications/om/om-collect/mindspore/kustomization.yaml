@@ -16,4 +16,8 @@ resources:
   - polymerization-download
   - polymerization-download-ip
   - account_org
+  - github-star
+commonAnnotations:
+  owner: zhongjun
+  email: "jun.zhongjun2@gmail.com"
 namespace: mindspore-om
