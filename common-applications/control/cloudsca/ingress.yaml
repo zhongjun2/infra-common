@@ -21,10 +21,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: oauth2-proxy
-              servicePort: 4180
-            path: /oauth2
-          - backend:
               serviceName: sca-web
               servicePort: 8528
             path: /(.*)
@@ -32,3 +28,25 @@ spec:
               serviceName: sca-gateway
               servicePort: 8080
             path: /gateway/(.*)
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  name: cloudsca-proxy
+  namespace: sca
+spec:
+  tls:
+    - hosts:
+        - sca.osinfra.cn
+      secretName: sca-secret-lts
+  rules:
+    - host: sca.osinfra.cn
+      http:
+        paths:
+          - backend:
+              serviceName: oauth2-proxy
+              servicePort: 4180
+            path: /oauth2
