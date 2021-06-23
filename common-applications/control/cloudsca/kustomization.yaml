@@ -7,6 +7,7 @@ resources:
 - sca-namespace.yaml
 - secrets.yaml
 - web.yaml
+- oauth-proxy.yaml
 commonLabels:
   server: infrastructure-sca
 namespace: sca
