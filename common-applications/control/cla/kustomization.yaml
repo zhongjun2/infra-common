@@ -10,13 +10,13 @@ resources:
 commonLabels:
   app: infrastructure-cla
 commonAnnotations:
+  email: chenzeng765@163.com
   owner: chenzeng
-  email: "chenzeng765@163.com"
 namespace: cla
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-backend
-  newTag: 16121f046be75ad9352cb523e52ecb97835e28ad
+  newTag: 32a2c8144b109221bd591d70b17771b3dd957fdc
 - name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/cla-webui
   newTag: 0eaa6da65a66f3a511245d3e761e181e2a22542f
