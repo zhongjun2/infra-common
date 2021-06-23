@@ -6,6 +6,9 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
     nginx.ingress.kubernetes.io/custom-http-errors: "400, 500"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/auth-response-headers: "X-Auth-Request-User, X-Auth-Request-Groups, X-Auth-Request-Email, X-Auth-Request-Preferred-Username"
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
   name: cloudsca
   namespace: sca
 spec:
@@ -17,6 +20,10 @@ spec:
     - host: sca.osinfra.cn
       http:
         paths:
+          - backend:
+              serviceName: oauth2-proxy
+              servicePort: 4180
+              path: /oauth2
           - backend:
               serviceName: sca-web
               servicePort: 8528
