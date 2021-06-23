@@ -9,7 +9,3 @@ patchesStrategicMerge:
 - configmap.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-images:
-- name: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/default_backend
-  newName: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/default_backend
-  newTag: 810353efaac838107f16f45702ad5ed135a919bd
