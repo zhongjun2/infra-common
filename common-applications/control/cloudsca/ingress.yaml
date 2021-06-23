@@ -23,7 +23,7 @@ spec:
           - backend:
               serviceName: oauth2-proxy
               servicePort: 4180
-              path: /oauth2
+            path: /oauth2
           - backend:
               serviceName: sca-web
               servicePort: 8528
